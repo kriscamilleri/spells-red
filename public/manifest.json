@@ -2,7 +2,7 @@
     "name": "Spells Red",
     "short_name": "Spells Red: Dungeons and Dragons 5e Spell Search",
     "description": "Dungeons and Dragons 5e Spell Search and Spellbook Creation",
-    "theme_color": "#ff4136",
+    "theme_color": "#c1272d",
     "icons": [
         {
             "src": "img/android-chrome-36x36.png",

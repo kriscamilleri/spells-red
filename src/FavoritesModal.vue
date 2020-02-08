@@ -41,7 +41,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="border border-primary">
+              <div class="added-container border border-primary">
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="m-3">
@@ -193,7 +193,12 @@ export default {
     },
     spellBookTitle() {
       return this.spellBookName.length > 0
-        ? `${this.spellBookName} Spellbook`
+        ? `${this.spellBookName}${
+            this.spellBookName[this.spellBookName.length - 1].toLowerCase() !==
+            "s"
+              ? "'s"
+              : "'"
+          } Spellbook`
         : "Your Spellbook";
     },
     formattedSubtitle: function() {
@@ -447,6 +452,11 @@ export default {
 .extended-description:after {
   content: "&nbsp";
   visibility: hidden;
+}
+.added-container {
+  max-height: 25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .close-button {
   font-size: 60%;

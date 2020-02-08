@@ -1,6 +1,9 @@
 <template>
   <b-navbar toggleable="md" type="light" variant="white" class="bg-light shadow-sm fixed-top">
-    <b-navbar-brand class="mega-brand" href="#">{{navTitle}}</b-navbar-brand>
+    <b-navbar-brand class="mega-brand text-primary" href="#">
+      <img src="/img/icons/android-chrome-48x48.png" width="36" class="mr-1" />
+      {{navTitle}}
+    </b-navbar-brand>
     <b-form-input
       size="md"
       class="search-input mini-search"
@@ -15,6 +18,7 @@
         <b-nav-item
           href="https://github.com/kriscamilleri/Curiously-Cheddars-5e-Spells-Search"
           class="float-left"
+          target="_blank"
         >Github</b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
@@ -59,9 +63,8 @@ export default {
   name: "SpellNavBar",
   data() {
     return {
-      printEnabled: Boolean,
+      printEnabled: false,
       localSearchText: ""
-
     };
   },
   props: {
@@ -82,7 +85,7 @@ export default {
       this.$emit("printEnabled", this.printEnabled);
     }
   },
-  created(){
+  created() {
     this.sideBarOn = false;
   }
 };

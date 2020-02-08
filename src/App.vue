@@ -95,8 +95,8 @@ export default {
   data() {
     return {
       spellBookFilter: [],
-      spellBookTitle: "CC's Spell Search",
-      navTitle: "CC's Spell Search",
+      spellBookTitle: "S.R. Spell Search",
+      navTitle: "S.R. Search",
       // title: "DnD Search Master",
       dataLoading: true,
       sideBarOn: false,
@@ -431,10 +431,15 @@ a {
 }
 
 /* SIDEBAR */
-body {
+html {
   font-size: 1.1rem;
+  /* background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); */
+  /* background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); */
+  height: 100%;
 }
-
+html > body {
+  /* background: none; */
+}
 #wrapper {
   padding-right: 0;
   -webkit-transition: all 0.5s ease;
@@ -446,13 +451,13 @@ body {
 #sidebar-wrapper {
   z-index: 1029;
   position: fixed;
-  height: 100%;
+  height: calc(100% - 2rem);
   overflow-y: auto;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  margin-top: -10px;
+  margin-top: -2rem;
 }
 
 #page-content-wrapper {
@@ -482,7 +487,10 @@ body {
   font-size: 18px;
   line-height: 60px;
 }
-
+.custom-checkbox,
+.custom-control-label {
+  cursor: pointer;
+}
 .sidebar-nav > .sidebar-brand a {
   color: #999999;
 }
@@ -498,7 +506,6 @@ body {
 }
 #wrapper.toggled #sidebar-wrapper {
   transform: translateX(0vw);
-  height: calc(100vh - 5rem);
 }
 
 :root {
