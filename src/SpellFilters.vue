@@ -211,7 +211,6 @@ export default {
       classAllSelected: true,
       levelAllSelected: true,
       schoolAllSelected: true,
-      ritualAllSelected: true,
       sourceAllSelected: true,
       concentrationAllSelected: true,
       ritualAllSelected: true
@@ -291,39 +290,39 @@ export default {
     toggleSideBar: function() {
       this.$emit("sideBarOn", false);
     },
-    toggleAllClasses(checked) {
+    toggleAllClasses() {
       this.selectedClassFilters = this.classAllSelected
         ? []
         : this.localClassFilters;
     },
-    toggleAllLevels(checked) {
+    toggleAllLevels() {
       this.selectedLevelFilters = this.levelAllSelected
         ? []
         : this.localLevelFilters;
     },
-    toggleAllSchools(checked) {
+    toggleAllSchools() {
       this.selectedSchoolFilters = this.schoolAllSelected
         ? []
         : this.localSchoolFilters;
     },
-    toggleAllSources(checked) {
+    toggleAllSources() {
       this.selectedSourceFilters = this.sourceAllSelected
         ? []
         : this.localSourceFilters;
     },
-    toggleAllRituals(checked) {
+    toggleAllRituals() {
       this.selectedRitualFilters = this.ritualAllSelected
         ? []
         : this.localRitualFilters;
     },
-    toggleAllConcentrations(checked) {
+    toggleAllConcentrations() {
       this.selectedConcentrationFilters = this.concentrationAllSelected
         ? []
         : this.localConcentrationFilters;
     }
   },
   watch: {
-    selectedClassFilters(newVal, oldVal) {
+    selectedClassFilters(newVal) {
       this.classAllSelected =
         this.selectedClassFilters.length == this.localClassFilters.length;
 

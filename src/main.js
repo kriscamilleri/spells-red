@@ -13,7 +13,8 @@ import Link from "bootstrap-vue";
 import Layout from "bootstrap-vue";
 import "bootstrap-vue/dist/bootstrap-vue.min.css";
 import "./bootstrap-theme/bootstrap.min.css";
-
+import './registerServiceWorker'
+Vue.config.productionTip = false
 Vue.use(
   Badge,
   Button,
