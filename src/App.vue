@@ -44,7 +44,7 @@
         <!-- <add-spell></add-spell> -->
         <favorites-modal :spells="spells"></favorites-modal>
         <div id="page-content-wrapper">
-          <b-container fluid class="bv-example-row m-1">
+          <b-container fluid class="p-2">
             <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
               <spell-card v-for="r in filteredSpells" :spell="r" :key="r.id" class="m-2"></spell-card>
             </b-row>
@@ -427,6 +427,14 @@ export default {
 }
 .btn-sm.close-button {
   border-radius: 0.3rem;
+}
+#page-content-wrapper .page-item:first-child .page-link {
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+}
+#page-content-wrapper .page-item:last-child .page-link {
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
 }
 .navbar-toggler {
   margin-right: 0px !important;

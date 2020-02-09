@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="md" class="nav-bg shadow-sm fixed-top">
     <b-navbar-brand class="mega-brand text-primary" href="#">
-      <img src="/img/icons/android-chrome-48x48.png" width="36" class="mr-1" />
+      <img src="/img/icons/android-chrome-48x48.png" width="36" class="nav-brand-icon mr-1" />
       {{navTitle}}
     </b-navbar-brand>
     <b-form-input
@@ -151,7 +151,13 @@ input.mini-search {
 .nav-button {
   border-radius: 0.25rem;
 }
+.nav-brand-icon:hover {
+  transform: scale(1.1);
+}
 
+.nav-brand-icon {
+  transition: 0.15s all;
+}
 .nav-button a {
   color: #fff !important;
   display: inline-block;
