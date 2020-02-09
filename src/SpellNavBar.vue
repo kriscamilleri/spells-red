@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="light" variant="white" class="bg-light shadow-sm fixed-top">
+  <b-navbar toggleable="md" class="nav-bg shadow-sm fixed-top">
     <b-navbar-brand class="mega-brand text-primary" href="#">
       <img src="/img/icons/android-chrome-48x48.png" width="36" class="mr-1" />
       {{navTitle}}
@@ -26,17 +26,17 @@
         <!-- <b-nav-item size="sm" class="my-2 mr-4 nav-button btn-secondary" v-b-modal="'spellModal'">Add Spell...</b-nav-item> -->
         <b-nav-item
           size="sm"
-          class="my-2 mr-4 nav-button btn-success"
+          class="my-2 mr-4 nav-button btn-success shadow-sm"
           v-on:click="togglePrint"
         >Print</b-nav-item>
         <b-nav-item
           size="sm"
-          class="my-2 mr-4 nav-button btn-primary"
+          class="my-2 mr-4 nav-button btn-primary shadow-sm"
           v-b-modal="'favoritesModal'"
         >Spellbook</b-nav-item>
         <b-nav-item
           href="#menu-toggle"
-          class="my-2 mr-4 nav-button btn-info"
+          class="my-2 mr-4 nav-button btn-info shadow-sm"
           :class="{ active: sideBarOn}"
           size="sm"
           v-on:click.prevent="toggleSideBar"

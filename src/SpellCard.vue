@@ -17,8 +17,8 @@
       >{{spell.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted" v-html="formattedSubtitle(spell)"></h6>
       <span class="badge-shrinker align-middle">
-        <b-badge variant="warning" v-if="spell.conc == true">Concentration</b-badge>
-        <b-badge variant="success" v-if="spell.ritual == true">Ritual</b-badge>
+        <b-badge variant="warning" v-if="spell.conc == true" class="mr-1">Concentration</b-badge>
+        <b-badge variant="success" v-if="spell.ritual == true" class="mr-1">Ritual</b-badge>
       </span>
       <p class="card-text text-sm text-muted" align-h="start">
         <!-- <b-modal
@@ -31,12 +31,12 @@
           class="details-text text-justify"
           :title="spell.name"
         >
-          <div class="modal-stats">
+          <div class="modal-stats shadow-sm">
             <span class="badge-shrinker float-right">
-              <b-badge variant="warning" v-if="spell.conc == true">Concentration</b-badge>
-              <b-badge variant="success" v-if="spell.ritual == true">Ritual</b-badge>
+              <b-badge variant="warning" v-if="spell.conc == true" class="mr-1">Concentration</b-badge>
+              <b-badge variant="success" v-if="spell.ritual == true" class="mr-1">Ritual</b-badge>
             </span>
-            <h6 class="card-subtitle text-muted" v-html="formattedSubtitle(spell)"></h6>
+            <p class="card-subtitle" v-html="formattedSubtitle(spell)"></p>
           </div>
           <div class="text-primary">Description</div>
           <span class="text-justify" v-html="formattedDescription(spell)"></span>
@@ -110,7 +110,9 @@ export default {
   padding: 15px;
   margin-top: -17px;
   margin-bottom: 15px;
-  background-color: #f8f9fa;
+  background-color: var(--light);
+  border-top: 0.125rem solid var(--primary);
+  border-bottom: 0.125rem solid var(--primary);
 }
 h6 {
   font-size: 1.15rem;
@@ -138,19 +140,28 @@ h6 {
 
 article.card {
   cursor: pointer;
+  transform: translateZ(0);
   min-height: 190px;
   min-width: 18rem;
   max-width: 18rem;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  border: none;
+  border-radius: 0.4rem;
+}
+.card:hover .card-title {
+  color: var(--primary-hover) !important;
+  transition: all 0.3s;
 }
 .card:hover {
   -webkit-transform: scale(1.03);
+  transform: translateZ(0);
   transform: scale(1.03);
   box-shadow: 0 0.5rem 1rem rgba(72, 72, 72, 0.25) !important;
 }
 
 .card:active {
+  transform: translateZ(0);
   box-shadow: 0 0.5rem 1rem rgba(72, 72, 72, 0.25) !important;
   -webkit-transform: scale(0.98);
   transform: scale(0.98);

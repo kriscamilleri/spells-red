@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-12">
           <div
-            class="btn btn-danger btn-sm float-right print-d-none"
+            class="btn btn-dark close-button btn-sm float-right print-d-none"
             @click="printEnabled = false"
           >X</div>
         </div>
@@ -24,7 +24,7 @@
         :sideBarOn="sideBarOn"
       ></spell-nav-bar>
       <div id="wrapper" :class="{ toggled: sideBarOn }" class="pt-2">
-        <div id="sidebar-wrapper" class="bg-light">
+        <div id="sidebar-wrapper" class="nav-bg">
           <spell-filters
             @sideBarOn="captureSideBarStatus"
             :classFilters="classFilters"
@@ -376,9 +376,69 @@ export default {
 </script>
 
 <style>
+:root {
+  --white: #fff;
+  --gray: #777;
+  --gray-dark: #484848;
+  --primary: #bb212b;
+  --primary-hover: #e80817;
+  --primary-focus: #a51d26;
+  --secondary: #795c62;
+  --success: #f5be47;
+  --success-hover: #fbae06;
+  --success-focus: #e39f0c;
+  --info: #6e93b6;
+  --info-hover: #5594cf;
+  --info-focus: #486c8e;
+  --warning: #ed7b5f;
+  --danger: #127ba3;
+  --light: #f8f9fa;
+  --dark: #bc524e;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: Asap, Segoe UI, Roboto, Helvetica Neue, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+.nav-bg {
+  background: var(--white);
+}
+.btn:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-info:hover,
+.btn-warning:hover,
+.btn-secondary:hover,
+.btn-primary:hover {
+  transform: scale(1.025);
+}
+.btn,
+.btn-success,
+.btn-danger,
+.btn-info,
+.btn-warning,
+.btn-secondary,
+.btn-primary {
+  transition: 0.15s ease-in-out;
+}
+.btn-sm.close-button {
+  border-radius: 0.3rem;
+}
 .navbar-toggler {
   margin-right: 0px !important;
 }
+.modal-dialog .modal-header {
+  border-bottom: none;
+}
+.modal-dialog .modal-content {
+  border: none;
+  border-radius: 0.4rem;
+}
+
 #app h1,
 #app h2,
 #app h3,
@@ -438,7 +498,7 @@ html {
   height: 100%;
 }
 html > body {
-  /* background: none; */
+  background: var(--light);
 }
 #wrapper {
   padding-right: 0;
@@ -496,7 +556,7 @@ html > body {
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-  color: #fff;
+  color: var(--white);
   background: none;
 }
 

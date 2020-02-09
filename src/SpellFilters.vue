@@ -1,10 +1,10 @@
 <template>
   <b-row class="m-2">
     <b-col sm="12">
-      <h3 class="my-2 mt-4">
+      <h3 class="my-2 mt-4 pt-4">
         Filters
         <span
-          class="btn btn-danger btn-sm float-right"
+          class="btn btn-dark btn-sm float-right close-button"
           id="closeSidebar"
           v-on:click="toggleSideBar"
         >X</span>
@@ -366,6 +366,9 @@ export default {
 .faux-column div {
   flex: 0 0 50%;
   /* max-width: 50%; */
+}
+.btn-sm.close-button {
+  border-radius: 0.3rem;
 }
 .filter-header {
   margin-top: 10px;
