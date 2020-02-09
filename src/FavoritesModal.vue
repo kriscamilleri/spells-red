@@ -14,7 +14,7 @@
           >Select as many spells as you'd like from below, give your Spellbook a name, and click Open Spellbook to open a new page with only the spells you selected.</p>
         </div>
       </div>
-      <div class="max-height row mb-3">
+      <div class="max-height row">
         <div class="col-md-6">
           <div class="border border-secondary p-3 mb-4">
             <div class="input-group mb-1">
@@ -374,7 +374,7 @@ export default {
     togglePaginationButtons: function() {
       //Caution: Hacky/Fragile stuff ahead
       let self = this;
-      const executable = function(self) {
+      const executable = function() {
         const infoContainer = document.getElementById("infoContainer");
         const subcontainer = document.getElementById("infoSubcontainer");
         const container = document.getElementById("infoContainer");
@@ -391,7 +391,7 @@ export default {
         const previousPage = scrollDistance > 0;
         self.previousEnabled = previousPage;
       };
-      this.delayExecution(100, executable(self));
+      this.delayExecution(100, executable);
     },
     resetPage: function() {
       this.paginate();
@@ -434,7 +434,9 @@ export default {
       const container = document.getElementById("infoContainer");
       this.containerWidth = container ? container.offsetWidth : 0;
       this.resetPage();
-      subcontainer.style.transform = ``;
+      if (subcontainer) {
+        subcontainer.style.transform = ``;
+      }
     },
     delayExecution(milliseconds, executable) {
       const self = this;
@@ -527,9 +529,13 @@ input.form-control {
   cursor: pointer;
 }
 
-.search-container li:active,
+.search-container li:active {
+  background-color: var(--primary-focus);
+}
+
 .search-container li:hover {
-  background-color: var(--dark);
+  background-color: var(--primary-hover);
+  color: var(--white);
 }
 .input-group > .custom-file,
 .input-group > .custom-select,

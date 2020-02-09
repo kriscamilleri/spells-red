@@ -17,26 +17,29 @@
       <b-navbar-nav>
         <b-nav-item
           href="https://github.com/kriscamilleri/Curiously-Cheddars-5e-Spells-Search"
-          class="float-left"
+          class="nav-button my-2 mx-2 btn-dark float-left shadow-sm"
           target="_blank"
-        >Github</b-nav-item>
+          size="sm"
+        >
+          Github
+        </b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <!-- <b-nav-item size="sm" class="my-2 mr-4 nav-button btn-secondary" v-b-modal="'spellModal'">Add Spell...</b-nav-item> -->
         <b-nav-item
           size="sm"
-          class="my-2 mr-4 nav-button btn-success shadow-sm"
+          class="my-2 mx-2 nav-button btn-success shadow-sm"
           v-on:click="togglePrint"
         >Print</b-nav-item>
         <b-nav-item
           size="sm"
-          class="my-2 mr-4 nav-button btn-primary shadow-sm"
+          class="my-2 mx-2 nav-button btn-primary shadow-sm"
           v-b-modal="'favoritesModal'"
         >Spellbook</b-nav-item>
         <b-nav-item
           href="#menu-toggle"
-          class="my-2 mr-4 nav-button btn-info shadow-sm"
+          class="my-2 mx-2 nav-button btn-info shadow-sm"
           :class="{ active: sideBarOn}"
           size="sm"
           v-on:click.prevent="toggleSideBar"
@@ -92,6 +95,11 @@ export default {
 </script>
 
 <style>
+a[target="_blank"]::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+  filter: invert();  
+}
 /*Necessary to left align text when nav-collapse is open*/
 @media (max-width: 767px) {
   #nav_collapse a {
@@ -101,7 +109,10 @@ export default {
     float: left;
   }
 }
-
+ .external-link{
+    vertical-align: initial; 
+    border: 1px solid #fff
+ }
 @media (max-width: 767px) {
   #nav_collapse {
     background: white;
@@ -151,7 +162,7 @@ input.mini-search {
 .nav-button {
   border-radius: 0.25rem;
 }
-.nav-brand-icon:hover {
+ .mega-brand:hover  .nav-brand-icon{
   transform: scale(1.1);
 }
 

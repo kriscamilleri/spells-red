@@ -411,6 +411,7 @@ export default {
 .btn-success:hover,
 .btn-danger:hover,
 .btn-info:hover,
+.btn-dark:hover,
 .btn-warning:hover,
 .btn-secondary:hover,
 .btn-primary:hover {
@@ -421,6 +422,7 @@ export default {
 .btn-danger,
 .btn-info,
 .btn-warning,
+.btn-dark,
 .btn-secondary,
 .btn-primary {
   transition: 0.15s ease-in-out;
