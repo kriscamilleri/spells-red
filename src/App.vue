@@ -369,7 +369,7 @@ export default {
   },
   mounted() {
     this.parseUrl();
-    const url = "https://www.curiouslycheddar.com/pastebin-4";
+    const url = "https://spells.red/pastebin";
     this.parseSpells(url);
   }
 };
