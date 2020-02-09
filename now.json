@@ -1,9 +1,8 @@
 {
-    "redirects": [
+    "rewrites": [
         {
             "source": "/pastebin",
-            "destination": "https://pastebin.com/raw/tq8pLpi8",
-            "statusCode": 200
+            "destination": "https://pastebin.com/raw/tq8pLpi8"
         }
     ]
 }
