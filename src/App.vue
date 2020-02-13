@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <title>{{spellBookTitle}}</title>
+    <title>{{ spellBookTitle }}</title>
     <meta name="viewport" content="width=device-width, user-scalable=false;" />
     <div class="print-mode" v-if="printEnabled === true">
       <div class="row">
@@ -8,13 +8,18 @@
           <div
             class="btn btn-dark close-button btn-sm float-right print-d-none"
             @click="printEnabled = false"
-          >X</div>
+          >
+            X
+          </div>
         </div>
       </div>
       <print :spells="spells"></print>
     </div>
     <div v-else>
-      <meta name="viewport" content="width=device-width, user-scalable=false;" />
+      <meta
+        name="viewport"
+        content="width=device-width, user-scalable=false;"
+      />
       <spell-nav-bar
         @sideBarOn="captureSideBarStatus"
         @searchText="captureSearchText"
@@ -44,9 +49,18 @@
         <!-- <add-spell></add-spell> -->
         <favorites-modal :spells="spells"></favorites-modal>
         <div id="page-content-wrapper">
-          <b-container fluid class="p-2">
-            <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
-              <spell-card v-for="r in filteredSpells" :spell="r" :key="r.id" class="m-2"></spell-card>
+          <b-container fluid class>
+            <b-row
+              :class="{ 'd-none': dataLoading }"
+              id="spellContainer"
+              align-h="center"
+            >
+              <spell-card
+                v-for="r in filteredSpells"
+                :spell="r"
+                :key="r.id"
+                class="m-2"
+              ></spell-card>
             </b-row>
             <div v-if="dataLoading" class="text-center p-5">
               <h2>Loading data...</h2>
