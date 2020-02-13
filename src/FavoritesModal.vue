@@ -9,9 +9,11 @@
     >
       <div class="row">
         <div class="col-md-12">
-          <p
-            class="d-inline-block"
-          >Select as many spells as you'd like from below, give your Spellbook a name, and click Open Spellbook to open a new page with only the spells you selected.</p>
+          <p class="d-inline-block">
+            Select as many spells as you'd like from below, give your Spellbook
+            a name, and click Open Spellbook to open a new page with only the
+            spells you selected.
+          </p>
         </div>
       </div>
       <div class="max-height row">
@@ -33,8 +35,15 @@
                     v-on:click="selectSpell(spell.id)"
                     :spell="spell"
                     :key="spell.id"
-                  >{{spell.name}}</li>
-                  <li class="list-group-item" v-if="filteredSpells.length === 0">No spells found.</li>
+                  >
+                    {{ spell.name }}
+                  </li>
+                  <li
+                    class="list-group-item"
+                    v-if="filteredSpells.length === 0"
+                  >
+                    No spells found.
+                  </li>
                 </ul>
               </div>
             </div>
@@ -45,15 +54,20 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="m-3">
-                      <h5 class="mb-3">{{spellBookTitle}}</h5>
+                      <h5 class="mb-3">{{ spellBookTitle }}</h5>
                       <!-- 
                       <input
                         class="input mt-2"
                         placeholder="ex. Perrywook's Book"
                         v-model="spellBookName"
                       />-->
-                      <label class="sr-only" for="inline-form-input-username">Spellbook Name</label>
-                      <b-input-group prepend="Spellbook Name" class="mb-2 mr-sm-2 mb-sm-0">
+                      <label class="sr-only" for="inline-form-input-username"
+                        >Spellbook Name</label
+                      >
+                      <b-input-group
+                        prepend="Spellbook Name"
+                        class="mb-2 mr-sm-2 mb-sm-0"
+                      >
                         <b-input
                           id="inline-form-input-username"
                           placeholder="Spellbook Name"
@@ -69,11 +83,9 @@
                         :key="spell.id"
                         class="btn btn-dark mt-2 mr-2 border-primary border"
                       >
-                        <small>Lvl{{selectedSpell.level}}</small>
-                        {{spell.name}}
-                        <small
-                          class="border-primary border-left px-1"
-                        >X</small>
+                        <small>Lvl{{ selectedSpell.level }}</small>
+                        {{ spell.name }}
+                        <small class="border-primary border-left px-1">X</small>
                       </span>
                     </div>
                   </div>
@@ -85,13 +97,16 @@
         <div class="col-md-6">
           <div class="max-height border d-flex flex-column">
             <div id="infoContainer" class="info-container py-4">
-              <div id="infoSubcontainer" class="info-subcontainer px-3 pb-5 pt-1 align-self-top">
+              <div
+                id="infoSubcontainer"
+                class="info-subcontainer px-3 pb-5 pt-1 align-self-top"
+              >
                 <span class="info-header">
-                  <h3>{{selectedSpell.name}}</h3>
-                  <h5
-                    v-if="selectedSpell.level"
-                  >Level {{selectedSpell.level}} - {{selectedSpell.school}}</h5>
-                  <small class="text-primary">{{selectedSpell.class}}</small>
+                  <h3>{{ selectedSpell.name }}</h3>
+                  <h5 v-if="selectedSpell.level">
+                    Level {{ selectedSpell.level }} - {{ selectedSpell.school }}
+                  </h5>
+                  <small class="text-primary">{{ selectedSpell.class }}</small>
                 </span>
                 <!-- <div
                   class="text-justify"
@@ -99,14 +114,24 @@
                   v-html="extendedDescription"
                 ></div>-->
                 <span class="extended-description text-justify">
-                  <strong v-if="selectedSpell.id" class="d-block pt-2 text-primary">Description</strong>
+                  <strong
+                    v-if="selectedSpell.id"
+                    class="d-block pt-2 text-primary"
+                    >Description</strong
+                  >
                   <span v-html="formattedDescription"></span>
-                  <strong v-if="selectedSpell.id" class="text-primary">Classes</strong>
-                  <p>{{selectedSpell.class}}</p>
-                  <strong v-if="selectedSpell.id" class="text-primary">Components</strong>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >Classes</strong
+                  >
+                  <p>{{ selectedSpell.class }}</p>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >Components</strong
+                  >
                   <p v-html="formattedComponents"></p>
-                  <strong v-if="selectedSpell.id" class="text-primary">School</strong>
-                  <p>{{selectedSpell.school}}</p>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >School</strong
+                  >
+                  <p>{{ selectedSpell.school }}</p>
                 </span>
               </div>
             </div>
@@ -118,18 +143,21 @@
                 class="btn btn-dark float-right"
                 :class="nextEnabled ? '' : 'disabled'"
                 v-on:click="nextPage()"
-              >Next</span>
+                >Next</span
+              >
 
               <span
                 class="btn btn-dark float-left"
                 :class="previousEnabled ? '' : 'disabled'"
                 v-on:click="previousPage()"
-              >Previous</span>
+                >Previous</span
+              >
               <span
                 :class="selectedSpell.id === undefined ? 'disabled' : ''"
                 class="btn btn-primary align-bottom"
                 v-on:click="addSpell(selectedSpell)"
-              >Add Spell</span>
+                >Add Spell</span
+              >
             </div>
           </div>
         </div>
@@ -143,8 +171,15 @@
             :class="addedSpells.length === 0 ? 'disabled' : 'false'"
             :href="generatedLink"
             target="_blank"
-          >Open Spellbook</b-button>
-          <b-button variant="dark" size class="float-right mx-1" v-on:click="hideModal">Cancel</b-button>
+            >Open Spellbook</b-button
+          >
+          <b-button
+            variant="dark"
+            size
+            class="float-right mx-1"
+            v-on:click="hideModal"
+            >Cancel</b-button
+          >
         </div>
       </template>
     </b-modal>
@@ -378,7 +413,9 @@ export default {
         const infoContainer = document.getElementById("infoContainer");
         const subcontainer = document.getElementById("infoSubcontainer");
         const container = document.getElementById("infoContainer");
-        self.containerWidth = container.offsetWidth;
+        if (container) {
+          self.containerWidth = container.offsetWidth;
+        }
         let lastChild = subcontainer.lastChild.lastChild;
         lastChild =
           lastChild.innerHTML === "" ? lastChild.previousSibling : lastChild;
