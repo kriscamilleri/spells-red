@@ -6,22 +6,22 @@ import Button from "bootstrap-vue";
 import Card from "bootstrap-vue";
 import Form from "bootstrap-vue";
 import FormCheckbox from "bootstrap-vue";
-import Pagination from "bootstrap-vue";
+// import Pagination from "bootstrap-vue";
 import Modal from "bootstrap-vue";
 import Nav from "bootstrap-vue";
 import Link from "bootstrap-vue";
 import Layout from "bootstrap-vue";
 import "bootstrap-vue/dist/bootstrap-vue.min.css";
 import "./bootstrap-theme/bootstrap.min.css";
-import './registerServiceWorker'
-Vue.config.productionTip = false
+import "./registerServiceWorker";
+Vue.config.productionTip = false;
 Vue.use(
   Badge,
   Button,
   Card,
   Form,
   FormCheckbox,
-  Pagination,
+  // Pagination,
   Nav,
   Link,
   Layout,

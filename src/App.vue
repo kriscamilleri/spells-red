@@ -377,7 +377,6 @@ export default {
           return response.json();
         })
         .then(data => {
-          let index = 0;
           this.spells = data.sort((a, b) => {
             const concatA =
               a.level != "Cantrip" ? `${a.level}${a.name}` : `${0}${a.name}`;
@@ -432,8 +431,8 @@ export default {
   },
   mounted() {
     this.parseUrl();
-    // const url = "https://spells.red/pastebin";
-    const url = "/spell_data_trimmed.json";
+    const url = "https://spells.red/pastebin";
+    // const url = "/spell_data_trimmed.json";
 
     this.parseSpells(url);
   }
