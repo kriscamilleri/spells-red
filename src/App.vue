@@ -56,23 +56,37 @@
               align-h="center"
             >
               <spell-card
-                v-for="r in filteredSpells"
+                v-for="r in cappedFilteredSpells"
                 :spell="r"
                 :key="r.id"
                 class="m-2"
               ></spell-card>
             </b-row>
+            <b-row>
+              <b-col class="d-flex">
+                <div
+                  class="btn btn-primary mt-4 mb-2 infinite-button"
+                  :class="
+                    cappedFilteredSpells.length < pageSize ? 'd-none' : ''
+                  "
+                  align="center"
+                  v-on:click="toggleNextCards"
+                >
+                  Load More [{{ pageSize }}/{{ filteredSpells.length }}]
+                </div>
+              </b-col>
+            </b-row>
             <div v-if="dataLoading" class="text-center p-5">
               <h2>Loading data...</h2>
             </div>
-            <b-pagination
+            <!-- <b-pagination
               align="center"
               class="p-4 mt-4"
               v-model="currentPage"
               :total-rows="spellSize"
               :per-page="pageSize"
               aria-controls="spellContainer"
-            ></b-pagination>
+            ></b-pagination> -->
           </b-container>
         </div>
       </div>
@@ -181,19 +195,27 @@ export default {
         spells = this.filterConcentration(spells);
         spells = this.filterRitual(spells);
 
-        const firstSpellid = (this.currentPage - 1) * this.pageSize;
-        const lastSpellid = this.currentPage * this.pageSize;
-
-        spells = spells.slice(firstSpellid, lastSpellid);
         return spells;
       }
       return [];
+    },
+    cappedFilteredSpells() {
+      let spells = this.filteredSpells;
+      const firstSpellid = (this.currentPage - 1) * this.pageSize;
+      const lastSpellid = this.currentPage * this.pageSize;
+
+      spells = spells.slice(firstSpellid, lastSpellid);
+      return spells;
     },
     spellSize() {
       return this.spells.length;
     }
   },
   methods: {
+    toggleNextCards() {
+      this.pageSize += 20;
+    },
+
     capturePrintToggle(printEnabled) {
       this.printEnabled = printEnabled;
     },
@@ -355,6 +377,7 @@ export default {
           return response.json();
         })
         .then(data => {
+          let index = 0;
           this.spells = data.sort((a, b) => {
             const concatA =
               a.level != "Cantrip" ? `${a.level}${a.name}` : `${0}${a.name}`;
@@ -379,11 +402,39 @@ export default {
       }
 
       console.log(this.spellBookTitle);
+    },
+    resetInfiniteScroll() {
+      this.pageSize = 20;
+    }
+  },
+  watch: {
+    searchText() {
+      this.resetInfiniteScroll();
+    },
+    classFilters() {
+      this.resetInfiniteScroll();
+    },
+    levelFilters() {
+      this.resetInfiniteScroll();
+    },
+    sourceFilters() {
+      this.resetInfiniteScroll();
+    },
+    schoolFilters() {
+      this.resetInfiniteScroll();
+    },
+    ritualFilters() {
+      this.resetInfiniteScroll();
+    },
+    concentrationFilters() {
+      this.resetInfiniteScroll();
     }
   },
   mounted() {
     this.parseUrl();
-    const url = "https://spells.red/pastebin";
+    // const url = "https://spells.red/pastebin";
+    const url = "/spell_data_trimmed.json";
+
     this.parseSpells(url);
   }
 };
@@ -636,5 +687,8 @@ h6,
     position: relative;
     margin-left: 0;
   }
+}
+.infinite-button {
+  margin: 0 auto;
 }
 </style>
