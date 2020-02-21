@@ -8,18 +8,13 @@
           <div
             class="btn btn-dark close-button btn-sm float-right print-d-none"
             @click="printEnabled = false"
-          >
-            X
-          </div>
+          >X</div>
         </div>
       </div>
       <print :spells="spells"></print>
     </div>
     <div v-else>
-      <meta
-        name="viewport"
-        content="width=device-width, user-scalable=false;"
-      />
+      <meta name="viewport" content="width=device-width, user-scalable=false;" />
       <spell-nav-bar
         @sideBarOn="captureSideBarStatus"
         @searchText="captureSearchText"
@@ -50,30 +45,19 @@
         <favorites-modal :spells="spells"></favorites-modal>
         <div id="page-content-wrapper">
           <b-container fluid class>
-            <b-row
-              :class="{ 'd-none': dataLoading }"
-              id="spellContainer"
-              align-h="center"
-            >
-              <spell-card
-                v-for="r in cappedFilteredSpells"
-                :spell="r"
-                :key="r.id"
-                class="m-2"
-              ></spell-card>
+            <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
+              <spell-card v-for="r in cappedFilteredSpells" :spell="r" :key="r.id" class="m-2"></spell-card>
             </b-row>
             <b-row>
               <b-col class="d-flex">
                 <div
                   class="btn btn-primary mt-4 mb-2 infinite-button"
                   :class="
-                    cappedFilteredSpells.length < pageSize ? 'd-none' : ''
+                    cappedFilteredSpells.length < cardCount ? 'd-none' : ''
                   "
                   align="center"
                   v-on:click="toggleNextCards"
-                >
-                  Load More [{{ pageSize }}/{{ filteredSpells.length }}]
-                </div>
+                >Load More [{{ cardCount }}/{{ filteredSpells.length }}]</div>
               </b-col>
             </b-row>
             <div v-if="dataLoading" class="text-center p-5">
@@ -84,9 +68,9 @@
               class="p-4 mt-4"
               v-model="currentPage"
               :total-rows="spellSize"
-              :per-page="pageSize"
+              :per-page="cardCount"
               aria-controls="spellContainer"
-            ></b-pagination> -->
+            ></b-pagination>-->
           </b-container>
         </div>
       </div>
@@ -132,6 +116,7 @@ export default {
       spells: [],
       currentPage: 1,
       pageSize: 20,
+      cardCount: 20,
       classFilters: [
         "bard",
         "cleric",
@@ -201,8 +186,8 @@ export default {
     },
     cappedFilteredSpells() {
       let spells = this.filteredSpells;
-      const firstSpellid = (this.currentPage - 1) * this.pageSize;
-      const lastSpellid = this.currentPage * this.pageSize;
+      const firstSpellid = (this.currentPage - 1) * this.cardCount;
+      const lastSpellid = this.currentPage * this.cardCount;
 
       spells = spells.slice(firstSpellid, lastSpellid);
       return spells;
@@ -213,7 +198,7 @@ export default {
   },
   methods: {
     toggleNextCards() {
-      this.pageSize += 20;
+      this.cardCount += this.pageSize;
     },
 
     capturePrintToggle(printEnabled) {
@@ -403,7 +388,18 @@ export default {
       console.log(this.spellBookTitle);
     },
     resetInfiniteScroll() {
-      this.pageSize = 20;
+      this.cardCount = this.pageSize;
+    },
+    scroll() {
+      const self = this;
+      window.onscroll = () => {
+        let bottomOfWindow =
+          window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+
+        if (bottomOfWindow) {
+          self.cardCount += this.pageSize; // replace it with your code
+        }
+      };
     }
   },
   watch: {
@@ -435,6 +431,7 @@ export default {
     // const url = "/spell_data_trimmed.json";
 
     this.parseSpells(url);
+    this.scroll();
   }
 };
 </script>
