@@ -109,7 +109,6 @@ export default {
       spellBookFilter: [],
       spellBookTitle: "S.R. Spell Search",
       navTitle: "S.R. Search",
-      // title: "DnD Search Master",
       dataLoading: true,
       sideBarOn: false,
       searchText: "",
@@ -163,7 +162,8 @@ export default {
         "Necromancy",
         "Transmutation"
       ],
-      printEnabled: false
+      printEnabled: false,
+      lastElemY: Number
     };
   },
   computed: {
@@ -389,15 +389,44 @@ export default {
     },
     resetInfiniteScroll() {
       this.cardCount = this.pageSize;
+      this.updateLastElementYPosition();
+    },
+    updateLastElementYPosition() {
+      this.$nextTick(() => {
+        const element = document.querySelector(".infinite-button");
+        this.lastElemY = this.getPosition(element).y;
+      });
+    },
+    getPosition(element) {
+      let xPosition = 0;
+      let yPosition = 0;
+
+      while (element) {
+        xPosition +=
+          element.offsetLeft - element.scrollLeft + element.clientLeft;
+        yPosition += element.offsetTop - element.scrollTop + element.clientTop;
+        element = element.offsetParent;
+      }
+
+      return { x: xPosition, y: yPosition };
     },
     scroll() {
       const self = this;
-      window.onscroll = () => {
-        let bottomOfWindow =
-          window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
 
-        if (bottomOfWindow) {
-          self.cardCount += this.pageSize; // replace it with your code
+      window.addEventListener("resize", this.updateLastElementYPosition());
+
+      window.onscroll = () => {
+        const scrollHeight = document.body.scrollHeight;
+        const totalHeight = window.scrollY + window.innerHeight;
+
+        console.log(
+          `scrollHeight ${scrollHeight}, totalHeight ${totalHeight}, lastelement ${this.lastElemY}`
+        );
+        if (totalHeight >= Math.max(scrollHeight, this.lastElemY)) {
+          this.updateLastElementYPosition();
+          this.$nextTick(() => {
+            self.cardCount += this.pageSize; // replace it with your code
+          });
         }
       };
     }
@@ -431,6 +460,7 @@ export default {
     // const url = "/spell_data_trimmed.json";
 
     this.parseSpells(url);
+    this.updateLastElementYPosition();
     this.scroll();
   }
 };
@@ -464,6 +494,10 @@ export default {
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+}
+html,
+body {
+  height: 100%;
 }
 .nav-bg {
   background: var(--white);
