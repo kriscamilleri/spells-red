@@ -42,7 +42,7 @@
           ></spell-filters>
         </div>
         <!-- <add-spell></add-spell> -->
-        <favorites-modal :spells="spells"></favorites-modal>
+        <favorites-modal :spells="cappedFilteredSpells"></favorites-modal>
         <div id="page-content-wrapper">
           <b-container fluid class>
             <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
