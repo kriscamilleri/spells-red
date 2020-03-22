@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import SpellParser from "./mixins/SpellParser.vue";
+import SpellParser from "../mixins/SpellParser.vue";
 
 export default {
   name: "Print",
@@ -60,7 +60,5 @@ export default {
   -webkit-column-rule: 1px dotted var(--dark);
   -moz-column-rule: 1px dotted var(--dark);
   column-rule: 1px dotted var(--dark); */
-}
-.print-mode {
 }
 </style>

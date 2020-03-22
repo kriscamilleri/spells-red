@@ -42,7 +42,7 @@
           ></spell-filters>
         </div>
         <!-- <add-spell></add-spell> -->
-        <favorites-modal :spells="cappedFilteredSpells"></favorites-modal>
+        <favorites-modal :spells="filteredSpells"></favorites-modal>
         <div id="page-content-wrapper">
           <b-container fluid class>
             <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
@@ -89,11 +89,11 @@ PWA
 Filter fixed width when closing
 */
 
-import SpellNavBar from "./SpellNavBar.vue";
-import SpellCard from "./SpellCard.vue";
-import Print from "./Print.vue";
-import SpellFilters from "./SpellFilters.vue";
-import FavoritesModal from "./FavoritesModal.vue";
+import SpellNavBar from "./components/SpellNavBar.vue";
+import SpellCard from "./components/SpellCard.vue";
+import Print from "./components/Print.vue";
+import SpellFilters from "./components/SpellFilters.vue";
+import FavoritesModal from "./components/FavoritesModal.vue";
 
 export default {
   components: {
@@ -419,9 +419,9 @@ export default {
         const scrollHeight = document.body.scrollHeight;
         const totalHeight = window.scrollY + window.innerHeight;
 
-        console.log(
-          `scrollHeight ${scrollHeight}, totalHeight ${totalHeight}, lastelement ${this.lastElemY}`
-        );
+        // console.log(
+        //   `scrollHeight ${scrollHeight}, totalHeight ${totalHeight}, lastelement ${this.lastElemY}`
+        // );
         if (totalHeight >= Math.max(scrollHeight, this.lastElemY)) {
           this.updateLastElementYPosition();
           this.$nextTick(() => {
@@ -542,6 +542,14 @@ body {
 .modal-dialog .modal-content {
   border: none;
   border-radius: 0.4rem;
+}
+
+#favoritesModal .modal-dialog .modal-content {
+  min-height: calc(100vh - 3.5rem);
+  height: calc(100vh - 3.5rem);
+}
+#favoritesModal .modal-body {
+  height: calc(100% - 9rem);
 }
 
 #app h1,
@@ -676,7 +684,7 @@ html > body {
 :root {
   --modal-container-footer: 14rem;
   --info-footer: 3em;
-  --info-column-gap: 15px;
+  --info-column-gap: 2rem;
 }
 
 .modal-xl {

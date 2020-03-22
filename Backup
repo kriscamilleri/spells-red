@@ -1,0 +1,91 @@
+<div class>
+          
+          <div class>
+            <div class>
+              <div class="border border-secondary">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Search</span>
+                  </div>
+                  <input type="text" v-model="searchString" class="form-control" />
+                </div>
+                <div class="search-container border">
+                  <div class="card-sm">
+                    <ul class="list-group list-group-flush">
+                      <li
+                        class="list-group-item"
+                        :class="selectedSpell.id === spell.id ? 'selected' : ''"
+                        v-for="spell in filteredSpells"
+                        v-on:click="selectSpell(spell.id)"
+                        :spell="spell"
+                        :key="spell.id"
+                      >{{ spell.name }}</li>
+                      <li
+                        class="list-group-item"
+                        v-if="filteredSpells.length === 0"
+                      >No spells found.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class>
+          <div class>
+            <div class>
+              <div class="border d-flex flex-column">
+                <div id="infoContainer" class="info-container py-4">
+                  <div
+                    id="infoSubcontainer"
+                    class="info-subcontainer px-3 pb-5 pt-1 align-self-top"
+                  >
+                    <span class="info-header">
+                      <h3>{{ selectedSpell.name }}</h3>
+                      <h5
+                        v-if="selectedSpell.level"
+                      >Level {{ selectedSpell.level }} - {{ selectedSpell.school }}</h5>
+                      <small class="text-primary">{{ selectedSpell.class }}</small>
+                    </span>
+                    <!-- <div
+                  class="text-justify"
+                  :class="this.selectedSpell.desc ? '' : 'invisible'"
+                  v-html="extendedDescription"
+                    ></div>-->
+                    <span class="extended-description text-justify">
+                      <strong v-if="selectedSpell.id" class="d-block pt-2 text-primary">Description</strong>
+                      <span v-html="formattedDescription"></span>
+                      <strong v-if="selectedSpell.id" class="text-primary">Classes</strong>
+                      <p>{{ selectedSpell.class }}</p>
+                      <strong v-if="selectedSpell.id" class="text-primary">Components</strong>
+                      <p v-html="formattedComponents"></p>
+                      <strong v-if="selectedSpell.id" class="text-primary">School</strong>
+                      <p>{{ selectedSpell.school }}</p>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  v-if="paginationEnabled === true"
+                  class="info-footer border p-2 pb-5 text-center align-self-end"
+                >
+                  <span
+                    class="btn btn-dark float-right"
+                    :class="nextEnabled ? '' : 'disabled'"
+                    v-on:click="nextPage()"
+                  >Next</span>
+
+                  <span
+                    class="btn btn-dark float-left"
+                    :class="previousEnabled ? '' : 'disabled'"
+                    v-on:click="previousPage()"
+                  >Previous</span>
+                  <span
+                    :class="selectedSpell.id === undefined ? 'disabled' : ''"
+                    class="btn btn-primary align-bottom"
+                    v-on:click="addSpell(selectedSpell)"
+                  >Add Spell</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
