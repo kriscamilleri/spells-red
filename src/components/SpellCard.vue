@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import SpellParser from "./mixins/SpellParser.vue";
+import SpellParser from "../mixins/SpellParser.vue";
 
 export default {
   name: "SpellCard",

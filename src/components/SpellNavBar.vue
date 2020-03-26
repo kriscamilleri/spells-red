@@ -16,7 +16,7 @@
     <b-collapse is-nav id="nav_collapse" class>
       <b-navbar-nav>
         <b-nav-item
-          href="https://github.com/kriscamilleri/Curiously-Cheddars-5e-Spells-Search"
+          href="https://github.com/kriscamilleri/spells-red"
           class="nav-button my-2 mx-2 btn-dark float-left shadow-sm"
           target="_blank"
           size="sm"

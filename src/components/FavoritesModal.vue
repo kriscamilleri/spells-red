@@ -6,106 +6,99 @@
       size="xl"
       method="post"
       ref="favoritesModal"
+      class
     >
-      <div class="row">
-        <div class="col-md-12">
-          <p class="d-inline-block">
-            Select as many spells as you'd like from below, give your Spellbook
-            a name, and click Open Spellbook to open a new page with only the
-            spells you selected.
-          </p>
-        </div>
-      </div>
-      <div class="max-height row">
-        <div class="col-md-6">
-          <div class="border border-secondary p-3 mb-4">
-            <div class="input-group mb-1">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Search</span>
-              </div>
-              <input type="text" v-model="searchString" class="form-control" />
-            </div>
-            <div class="search-container border">
-              <div class="card-sm">
-                <ul class="list-group list-group-flush">
-                  <li
-                    class="list-group-item"
-                    :class="selectedSpell.id === spell.id ? 'selected' : ''"
-                    v-for="spell in filteredSpells"
-                    v-on:click="selectSpell(spell.id)"
-                    :spell="spell"
-                    :key="spell.id"
-                  >
-                    {{ spell.name }}
-                  </li>
-                  <li
-                    class="list-group-item"
-                    v-if="filteredSpells.length === 0"
-                  >
-                    No spells found.
-                  </li>
-                </ul>
-              </div>
-            </div>
+      <div class="d-flex flex-column body-container">
+        <div class="grid-container">
+          <div class="grid-top">
+            <p class="d-block">
+              Select as many spells as you'd like from below, give your Spellbook
+              a name, and click Open Spellbook to open a new page with only the
+              spells you selected.
+            </p>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="added-container border border-primary">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="m-3">
-                      <h5 class="mb-3">{{ spellBookTitle }}</h5>
-                      <!-- 
+          <div class="grid-left-top border border-primary shadow-sm">
+            <div class id="yourSpellbook">
+              <div class>
+                <div class="added-container">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="m-3">
+                        <h5 class="mb-3">{{ spellBookTitle }}</h5>
+                        <!-- 
                       <input
                         class="input mt-2"
                         placeholder="ex. Perrywook's Book"
                         v-model="spellBookName"
-                      />-->
-                      <label class="sr-only" for="inline-form-input-username"
-                        >Spellbook Name</label
-                      >
-                      <b-input-group
-                        prepend="Spellbook Name"
-                        class="mb-2 mr-sm-2 mb-sm-0"
-                      >
-                        <b-input
-                          id="inline-form-input-username"
-                          placeholder="Spellbook Name"
-                          v-model="spellBookName"
-                        ></b-input>
-                      </b-input-group>
-                      <h5 class="mt-4">Added Spells</h5>
-                      <p v-if="addedSpells.length < 1">No Spells selected.</p>
+                        />-->
+                        <label class="sr-only" for="inline-form-input-username">Spellbook Name</label>
+                        <b-input-group prepend="Spellbook Name" class="mb-2 mr-sm-2 mb-sm-0">
+                          <b-input
+                            id="inline-form-input-username"
+                            placeholder="Name your spellbook"
+                            v-model="spellBookName"
+                          ></b-input>
+                        </b-input-group>
+                        <h5 class="mt-4">Added Spells</h5>
+                        <p v-if="addedSpells.length < 1">No spells selected.</p>
 
-                      <span
-                        v-for="spell in addedSpells"
-                        v-on:click="removeSpell(spell.id)"
-                        :key="spell.id"
-                        class="btn btn-dark mt-2 mr-2 border-primary border"
-                      >
-                        <small>Lvl{{ selectedSpell.level }}</small>
-                        {{ spell.name }}
-                        <small class="border-primary border-left px-1">X</small>
-                      </span>
+                        <span
+                          v-for="spell in addedSpells"
+                          v-on:click="removeSpell(spell.id)"
+                          :key="spell.id"
+                          class="btn btn-dark mt-2 mr-2 border-primary border"
+                        >
+                          <small>{{ spell.level }}</small>
+                          {{ spell.name }}
+                          <small
+                            class="border-primary border-left px-1"
+                          >X</small>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="max-height border d-flex flex-column">
-            <div id="infoContainer" class="info-container py-4">
-              <div
-                id="infoSubcontainer"
-                class="info-subcontainer px-3 pb-5 pt-1 align-self-top"
-              >
+          <div class="grid-left-bottom border border-secondary shadow-sm p-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text border-bottom-square">Search</span>
+              </div>
+              <input
+                type="text"
+                v-model="searchString"
+                class="form-control border-bottom-square"
+                placeholder="Search for spells"
+              />
+            </div>
+            <div class="search-container-parent border">
+              <div class="search-container border">
+                <div class="card-sm">
+                  <ul class="list-group list-group-flush">
+                    <li
+                      class="list-group-item"
+                      :class="selectedSpell.id === spell.id ? 'selected' : ''"
+                      v-for="spell in filteredSpells"
+                      v-on:click="selectSpell(spell.id)"
+                      :spell="spell"
+                      :key="spell.id"
+                    >{{ spell.name }}</li>
+                    <li class="list-group-item" v-if="filteredSpells.length === 0">No spells found.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-right border border-secondary shadow-sm">
+            <div id="infoContainer" class="info-container">
+              <div id="infoSubcontainer" class="info-subcontainer align-self-top">
                 <span class="info-header">
                   <h3>{{ selectedSpell.name }}</h3>
-                  <h5 v-if="selectedSpell.level">
-                    Level {{ selectedSpell.level }} - {{ selectedSpell.school }}
-                  </h5>
+                  <h5
+                    v-if="selectedSpell.level"
+                  >Level {{ selectedSpell.level }} - {{ selectedSpell.school }}</h5>
                   <small class="text-primary">{{ selectedSpell.class }}</small>
                 </span>
                 <!-- <div
@@ -114,50 +107,36 @@
                   v-html="extendedDescription"
                 ></div>-->
                 <span class="extended-description text-justify">
-                  <strong
-                    v-if="selectedSpell.id"
-                    class="d-block pt-2 text-primary"
-                    >Description</strong
-                  >
+                  <strong v-if="selectedSpell.id" class="d-block pt-2 text-primary">Description</strong>
                   <span v-html="formattedDescription"></span>
-                  <strong v-if="selectedSpell.id" class="text-primary"
-                    >Classes</strong
-                  >
+                  <strong v-if="selectedSpell.id" class="text-primary">Classes</strong>
                   <p>{{ selectedSpell.class }}</p>
-                  <strong v-if="selectedSpell.id" class="text-primary"
-                    >Components</strong
-                  >
+                  <strong v-if="selectedSpell.id" class="text-primary">Components</strong>
                   <p v-html="formattedComponents"></p>
-                  <strong v-if="selectedSpell.id" class="text-primary"
-                    >School</strong
-                  >
+                  <strong v-if="selectedSpell.id" class="text-primary">School</strong>
                   <p>{{ selectedSpell.school }}</p>
                 </span>
               </div>
             </div>
             <div
               v-if="paginationEnabled === true"
-              class="info-footer border p-2 pb-5 text-center align-self-end"
+              class="info-footer border-top p-2 pb-5 text-center align-self-end"
             >
               <span
                 class="btn btn-dark float-right"
                 :class="nextEnabled ? '' : 'disabled'"
                 v-on:click="nextPage()"
-                >Next</span
-              >
-
+              >Next</span>
               <span
                 class="btn btn-dark float-left"
                 :class="previousEnabled ? '' : 'disabled'"
                 v-on:click="previousPage()"
-                >Previous</span
-              >
+              >Previous</span>
               <span
                 :class="selectedSpell.id === undefined ? 'disabled' : ''"
                 class="btn btn-primary align-bottom"
                 v-on:click="addSpell(selectedSpell)"
-                >Add Spell</span
-              >
+              >Add Spell</span>
             </div>
           </div>
         </div>
@@ -171,15 +150,8 @@
             :class="addedSpells.length === 0 ? 'disabled' : 'false'"
             :href="generatedLink"
             target="_blank"
-            >Open Spellbook</b-button
-          >
-          <b-button
-            variant="dark"
-            size
-            class="float-right mx-1"
-            v-on:click="hideModal"
-            >Cancel</b-button
-          >
+          >Open Spellbook</b-button>
+          <b-button variant="dark" size class="float-right mx-1" v-on:click="hideModal">Cancel</b-button>
         </div>
       </template>
     </b-modal>
@@ -389,8 +361,9 @@ export default {
       const subcontainer = document.getElementById("infoSubcontainer");
       const container = document.getElementById("infoContainer");
       this.containerWidth = container.offsetWidth;
-      const translate = this.pageCount * (this.containerWidth + 15);
-      subcontainer.style.transform = `translateX(-${translate}px)`;
+      const translate = this.pageCount * this.containerWidth;
+      const translatePadding = this.pageCount > 0 ? 0.25 : 0;
+      subcontainer.style.transform = `translateX(calc( -${translate}px - ${translatePadding}rem))`;
       this.togglePaginationButtons();
     },
     nextPage: function() {
@@ -401,9 +374,10 @@ export default {
       const subcontainer = document.getElementById("infoSubcontainer");
       const container = document.getElementById("infoContainer");
       this.containerWidth = container.offsetWidth;
-      const translate = this.pageCount * (this.containerWidth + 15);
-
-      subcontainer.style.transform = `translateX(-${translate}px)`;
+      // const translate = this.pageCount * (this.containerWidth + 7.5);
+      const translate = this.pageCount * this.containerWidth;
+      const translatePadding = this.pageCount > 0 ? 0.25 : 0;
+      subcontainer.style.transform = `translateX(calc(-${translate}px - ${translatePadding}rem))`;
       this.togglePaginationButtons();
     },
     togglePaginationButtons: function() {
@@ -485,15 +459,84 @@ export default {
 };
 </script>
 <style scoped>
+@media only screen and (min-width: 600px) {
+  .modal-lg .modal-content {
+    min-height: 100vh;
+    padding: 3rem;
+  }
+
+  .modal .grid-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas:
+      "top top"
+      "left-top right"
+      "left-bottom right";
+  }
+
+  .modal .grid-container > div {
+    height: 100%;
+  }
+
+  .modal .close {
+    margin-top: -3rem;
+    margin-right: -3rem;
+    font-size: 2rem;
+  }
+}
+.grid-top {
+  grid-area: top;
+}
+.grid-left-top {
+  grid-area: left-top;
+  /* background-color: red; */
+}
+.grid-left-bottom {
+  grid-area: left-bottom;
+  /* background-color: green; */
+  overflow: auto;
+}
+.grid-right {
+  grid-area: right;
+  overflow: auto;
+  /* background-color: blue; */
+}
+.border-bottom-square {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.grid-container {
+  display: grid;
+  grid-gap: 1rem;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 20rem 20rem 20rem;
+  grid-template-areas:
+    "top"
+    "left-top"
+    "left-bottom"
+    "right";
+  /* background-color: #fff; */
+  color: #444;
+  justify-content: space-between;
+  align-content: space-between;
+}
+.grid-container > div {
+  /* height: 20rem; */
+}
+.body-container {
+  height: 100%;
+  overflow: auto;
+}
 .max-height {
-  height: calc(100% - 3rem);
+  /* height: calc(100% - 3rem); */
 }
 .extended-description:after {
   content: "&nbsp";
   visibility: hidden;
 }
 .added-container {
-  max-height: 25rem;
+  /* max-height: 25rem; */
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -512,7 +555,9 @@ input.form-control {
   background-color: var(--primary);
 }
 .info-container {
-  max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer)));
+  height: calc(100% - var(--info-footer) - 0.6rem);
+  padding: 1rem;
+  /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
   -webkit-column-width: 20rem;
   -moz-column-width: 20rem;
   column-width: 20rem;
@@ -535,7 +580,7 @@ input.form-control {
 }
 .info-subcontainer {
   text-overflow: ellipsis;
-  max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer)));
+  /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
 }
 .info-container {
   -ms-overflow-style: none;
@@ -553,12 +598,16 @@ input.form-control {
   ); */
   margin-top: auto;
 }
+.search-container-parent {
+  overflow: auto;
+  height: calc(100% - 2.5rem);
+}
 .search-container {
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
-  height: 15rem;
+  /* height: 15rem; */
   overflow: scroll;
 }
 .search-container li.list-group-item {
@@ -603,18 +652,6 @@ input.form-control {
 .modal-lg .modal-dialog {
   min-width: 100%;
   margin: 0;
-}
-@media only screen and (min-width: 600px) {
-  .modal-lg .modal-content {
-    min-height: 100vh;
-    padding: 3rem;
-  }
-
-  .modal .close {
-    margin-top: -3rem;
-    margin-right: -3rem;
-    font-size: 2rem;
-  }
 }
 .modal .custom-select {
   background: none;
