@@ -80,13 +80,13 @@
 
 <script>
 /* IDEAS
-Minimal mode
-Fix text to be more obvious
-Size adjustment
-Filter by ritual or conc
-Expand all cards
-PWA
-Filter fixed width when closing
+Better display names in spellbook
+Add new spells
+Better spell creation 
+	Reset selected spells 
+	Can apply to current visibility
+Shadow on filters
+
 */
 
 import SpellNavBar from "./SpellNavBar.vue";
@@ -578,6 +578,7 @@ body.modal-open {
     display: none;
   }
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,10 +1,12 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.spells_red__dungeons_and_dragons_5e_spell_search.twa",
-    "sha256_cert_fingerprints": [
-      "73:F1:AD:C6:C3:20:A4:A0:4C:10:80:98:86:B3:09:25:6A:24:AA:B2:AB:B5:8F:C1:F4:12:E4:0B:10:81:99:E1"
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.spells_red__dungeons_and_dragons_5e_spell_search.twa",
+      "sha256_cert_fingerprints": [
+        "B9:D2:28:84:11:0F:D5:A0:AE:2F:25:48:AB:C5:59:23:8F:CF:B3:3B:22:4E:7D:E9:96:06:ED:18:F1:DD:0C:F0"
+      ]
+    }
   }
-}]
+]
