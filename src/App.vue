@@ -622,18 +622,18 @@ button.close:active {
   
 
   transition: background 0s;
+}
+button.close:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
+    center/15000%;
 } */
-
 body:not(.user-is-tabbing) button:focus,
 body:not(.user-is-tabbing) input:focus,
 body:not(.user-is-tabbing) select:focus,
 body:not(.user-is-tabbing) textarea:focus {
   outline: none;
 }
-button.close:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
-    center/15000%;
-}
+
 .input-group > .custom-select:not(:last-child),
 .input-group > .form-control:not(:last-child) {
   border-radius: 0.5rem !important;
