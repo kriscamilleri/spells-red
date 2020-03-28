@@ -107,8 +107,8 @@ export default {
   data() {
     return {
       spellBookFilter: [],
-      spellBookTitle: "S.R. Spell Search",
-      navTitle: "S.R. Search",
+      spellBookTitle: "Spells.Red",
+      navTitle: "Spells.Red",
       dataLoading: true,
       sideBarOn: false,
       searchText: "",
@@ -429,6 +429,13 @@ export default {
           });
         }
       };
+    },
+    showOutline(e) {
+      if (e.keyCode === 9) {
+        // the "I am a keyboard user" key
+        document.body.classList.add("user-is-tabbing");
+        window.removeEventListener("keydown", this.showOutline);
+      }
     }
   },
   watch: {
@@ -455,6 +462,7 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener("keydown", this.showOutline);
     this.parseUrl();
     const url = "https://spells.red/pastebin";
     // const url = "/spell_data_trimmed.json";
@@ -524,6 +532,10 @@ body {
 }
 .btn-sm.close-button {
   border-radius: 0.3rem;
+}
+input.form-control,
+.input-group-prepend .input-group-text {
+  border-radius: 0.25rem;
 }
 #page-content-wrapper .page-item:first-child .page-link {
   border-top-left-radius: 0.4rem;
@@ -598,7 +610,34 @@ body.modal-open {
 a {
   color: #007bff;
 }
+/* 
+button.close {
+  background-position: center;
+  transition: background 0.8s;
+  border-radius: 4rem;
+}
+button.close:active {
+  background-color: #6eb9f7;
+  background-size: 90%;
+  
 
+  transition: background 0s;
+} */
+
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+button.close:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
+    center/15000%;
+}
+.input-group > .custom-select:not(:last-child),
+.input-group > .form-control:not(:last-child) {
+  border-radius: 0.5rem !important;
+}
 #app {
   margin-right: 15px;
   margin-right: 15px;

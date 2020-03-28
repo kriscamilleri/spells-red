@@ -14,48 +14,48 @@
     />
     <b-navbar-toggle target="nav_collapse" class="float-right navbar-toggle"></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse" class>
-      <b-navbar-nav>
-        <b-nav-item
-          href="https://github.com/kriscamilleri/spells-red"
-          class="nav-button my-2 mx-2 btn-dark float-left shadow-sm"
-          target="_blank"
-          size="sm"
-        >
-          Github
-        </b-nav-item>
-      </b-navbar-nav>
-      <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
-        <!-- <b-nav-item size="sm" class="my-2 mr-4 nav-button btn-secondary" v-b-modal="'spellModal'">Add Spell...</b-nav-item> -->
-        <b-nav-item
-          size="sm"
-          class="my-2 mx-2 nav-button btn-success shadow-sm"
-          v-on:click="togglePrint"
-        >Print</b-nav-item>
-        <b-nav-item
-          size="sm"
-          class="my-2 mx-2 nav-button btn-primary shadow-sm"
-          v-b-modal="'favoritesModal'"
-        >Spellbook</b-nav-item>
-        <b-nav-item
-          href="#menu-toggle"
-          class="my-2 mx-2 nav-button btn-info shadow-sm"
-          :class="{ active: sideBarOn}"
-          size="sm"
-          v-on:click.prevent="toggleSideBar"
-          id="menu-toggle"
-        >Filter</b-nav-item>
-      </b-navbar-nav>
-      <div class="input-group">
-        <b-form-input
-          size="md"
-          class="search-input"
-          type="text"
-          @input="toggleSearch"
-          v-model="localSearchText"
-          placeholder="Search"
-        />
-        <a target="_self" href="#" class="navbar-brand mini-brand">CC's Spell Search</a>
+      <div id="collapse_container" class="p-2 mt-2">
+        <b-navbar-nav>
+          <b-nav-item
+            href="https://github.com/kriscamilleri/spells-red"
+            class="nav-button my-2 mx-2 btn-dark float-left shadow-sm"
+            target="_blank"
+            size="sm"
+          >Github</b-nav-item>
+        </b-navbar-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <!-- <b-nav-item size="sm" class="my-2 mr-4 nav-button btn-secondary" v-b-modal="'spellModal'">Add Spell...</b-nav-item> -->
+          <b-nav-item
+            size="sm"
+            class="my-2 mx-2 nav-button btn-success shadow-sm"
+            v-on:click="togglePrint"
+          >Print</b-nav-item>
+          <b-nav-item
+            size="sm"
+            class="my-2 mx-2 nav-button btn-primary shadow-sm"
+            v-b-modal="'favoritesModal'"
+          >Spellbook</b-nav-item>
+          <b-nav-item
+            href="#menu-toggle"
+            class="my-2 mx-2 nav-button btn-info shadow-sm"
+            :class="{ active: sideBarOn}"
+            size="sm"
+            v-on:click.prevent="toggleSideBar"
+            id="menu-toggle"
+          >Filter</b-nav-item>
+        </b-navbar-nav>
+        <div class="input-group mx-2">
+          <b-form-input
+            size="md"
+            class="search-input"
+            type="text"
+            @input="toggleSearch"
+            v-model="localSearchText"
+            placeholder="Search"
+          />
+          <a target="_self" href="#" class="navbar-brand mini-brand">CC's Spell Search</a>
+        </div>
       </div>
     </b-collapse>
   </b-navbar>
@@ -95,10 +95,25 @@ export default {
 </script>
 
 <style>
+button[aria-expanded="true"].navbar-toggler {
+  background-color: #ddd;
+  transition: all 0.2s ease-in-out;
+}
+
+button[aria-expanded="false"].navbar-toggler {
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+}
+button[aria-expanded="true"].navbar-toggler .navbar-toggler-icon {
+  filter: brightness(1000);
+}
+button[aria-expanded="false"].navbar-toggler .navbar-toggler-icon {
+  filter: brightness(1);
+}
 a[target="_blank"]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
   margin: 0 3px 0 5px;
-  filter: invert();  
+  filter: saturation(100);
 }
 /*Necessary to left align text when nav-collapse is open*/
 @media (max-width: 767px) {
@@ -109,20 +124,25 @@ a[target="_blank"]::after {
     float: left;
   }
 }
- .external-link{
-    vertical-align: initial; 
-    border: 1px solid #fff
- }
+.external-link {
+  vertical-align: initial;
+  border: 1px solid #fff;
+}
 @media (max-width: 767px) {
   #nav_collapse {
     background: white;
     width: 100%;
     min-width: 100%;
-    margin-left: -10px;
-    padding: 10px;
-    border-radius: 0.25rem;
+    z-index: -1;
+    /* margin-left: -10px; */
+    /* padding: 10px; */
+    border-radius: 0 0 0.5rem 0.5rem;
     box-shadow: 0 0.125rem 0.25rem rgba(72, 72, 72, 0.075) !important;
     border: 1px solid #e4e5e7 !important;
+    border-top-color: transparent !important;
+  }
+  .collapse > #collapse_container {
+    display: block;
   }
   a.mini-brand {
     display: block;
@@ -140,6 +160,9 @@ a[target="_blank"]::after {
   }
 }
 
+#collapse_container {
+  display: contents;
+}
 a.mini-brand {
   display: none;
 }
@@ -156,13 +179,13 @@ input.mini-search {
 }
 
 .navbar {
-  max-height: 3.75rem;
+  max-height: 3.4rem;
 }
 
 .nav-button {
   border-radius: 0.25rem;
 }
- .mega-brand:hover  .nav-brand-icon{
+.mega-brand:hover .nav-brand-icon {
   transform: scale(1.1);
 }
 

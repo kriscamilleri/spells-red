@@ -501,7 +501,7 @@ export default {
   overflow: auto;
   /* background-color: blue; */
 }
-.border-bottom-square {
+.input-group-text.border-bottom-square {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
