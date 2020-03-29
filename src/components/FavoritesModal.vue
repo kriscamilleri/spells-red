@@ -465,6 +465,26 @@ export default {
     padding: 3rem;
   }
 
+  .info-container {
+    height: calc(100% - var(--info-footer) - 0.6rem);
+    padding: 1rem;
+    /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
+    -webkit-column-width: 20rem;
+    -moz-column-width: 20rem;
+    column-width: 20rem;
+    break-inside: avoid-page;
+    -moz-column-fill: auto;
+    column-fill: auto;
+    -webkit-column-gap: var(--info-column-gap);
+    -moz-column-gap: var(--info-column-gap);
+    column-gap: var(--info-column-gap);
+    -webkit-column-rule: 1px dotted var(--dark);
+    -moz-column-rule: 1px dotted var(--dark);
+    column-rule: 1px dotted var(--dark);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .modal .grid-container {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr 1fr;
@@ -483,6 +503,25 @@ export default {
     margin-right: -3rem;
     font-size: 2rem;
   }
+}
+.info-container {
+  height: calc(100% - var(--info-footer) - 0.6rem);
+  padding: 1rem;
+  /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
+  /* -webkit-column-width: 20rem;
+  -moz-column-width: 20rem;
+  column-width: 20rem;
+  break-inside: avoid-page;
+  -moz-column-fill: auto;
+  column-fill: auto;
+  -webkit-column-gap: var(--info-column-gap);
+  -moz-column-gap: var(--info-column-gap);
+  column-gap: var(--info-column-gap);
+  -webkit-column-rule: 1px dotted var(--dark);
+  -moz-column-rule: 1px dotted var(--dark);
+  column-rule: 1px dotted var(--dark);*/
+  overflow: auto;
+  text-overflow: ellipsis;
 }
 .grid-top {
   grid-area: top;
@@ -553,25 +592,6 @@ input.form-control {
 .selected {
   color: var(--white);
   background-color: var(--primary);
-}
-.info-container {
-  height: calc(100% - var(--info-footer) - 0.6rem);
-  padding: 1rem;
-  /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
-  -webkit-column-width: 20rem;
-  -moz-column-width: 20rem;
-  column-width: 20rem;
-  break-inside: avoid-page;
-  -moz-column-fill: auto;
-  column-fill: auto;
-  -webkit-column-gap: var(--info-column-gap);
-  -moz-column-gap: var(--info-column-gap);
-  column-gap: var(--info-column-gap);
-  -webkit-column-rule: 1px dotted var(--dark);
-  -moz-column-rule: 1px dotted var(--dark);
-  column-rule: 1px dotted var(--dark);
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .info-container .info-header {
   -webkit-column-span: all;
