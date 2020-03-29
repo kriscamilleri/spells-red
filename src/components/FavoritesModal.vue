@@ -40,10 +40,10 @@
                           ></b-input>
                         </b-input-group>
                         <h5 class="mt-4">Added Spells</h5>
-                        <p v-if="addedSpells.length < 1">No spells selected.</p>
+                        <p v-if="addedSpellsLocal.length < 1">No spells selected.</p>
 
                         <span
-                          v-for="spell in addedSpells"
+                          v-for="spell in addedSpellsLocal"
                           v-on:click="removeSpell(spell.id)"
                           :key="spell.id"
                           class="btn btn-dark mt-2 mr-2 border-primary border"
@@ -147,7 +147,7 @@
             variant="success"
             size
             class="mx-1"
-            :class="addedSpells.length === 0 ? 'disabled' : 'false'"
+            :class="addedSpellsLocal.length === 0 ? 'disabled' : 'false'"
             :href="generatedLink"
             target="_blank"
           >Open Spellbook</b-button>
@@ -162,14 +162,15 @@
 export default {
   name: "FavoritesModal",
   props: {
-    spells: Array
+    spells: Array,
+    addedSpells: Array
   },
   data() {
     return {
+      addedSpellsLocal: [],
       searchString: "",
       spellBookName: "",
       selectedSpell: {},
-      addedSpells: [],
       containerWidth: Number,
       pageCount: 0,
       paginationEnabled: true,
@@ -193,7 +194,7 @@ export default {
       return "<p class='extended-description'></p>";
     },
     generatedLink: function() {
-      const spellList = this.addedSpells.map(c => c.id);
+      const spellList = this.addedSpellsLocal.map(c => c.id);
       const joinedSpells = spellList.join("-");
       const url = `${window.location.protocol}//${window.location.host}?spellbookname=${this.spellBookName}&spellbook=${joinedSpells}`;
       return url;
@@ -298,12 +299,20 @@ export default {
       return "muted";
     }
   },
+  watch: {
+    addedSpells() {
+      const self = this;
+      self.addedSpellsLocal = [...self.addedSpells]; //forEach(c => self.addedSpellsLocal.push(c));
+    }
+  },
+  created() {},
   mounted() {
+    const self = this;
+
     // const container = document.getElementsByClassName("info-container")[0];
     // this.containerWidth = container.offsetWidth;
     // window.addEventListener("resize", this.handleResize);
 
-    const self = this;
     let executable;
     window.onresize = function() {
       clearTimeout(executable);
@@ -313,12 +322,14 @@ export default {
   methods: {
     removeSpell(id) {
       let spells = [];
-      for (let i = 0; i < this.addedSpells.length; i++) {
-        if (this.addedSpells[i].id !== id) {
-          spells.push(this.addedSpells[i]);
+      for (let i = 0; i < this.addedSpellsLocal.length; i++) {
+        if (this.addedSpellsLocal[i].id !== id) {
+          spells.push(this.addedSpellsLocal[i]);
+        } else {
+          this.$emit("spellRemoved", this.addedSpellsLocal[i].id);
         }
       }
-      this.addedSpells = spells;
+      this.addedSpellsLocal = spells;
     },
     convertJsonArrayToHtml(jsonArr) {
       let text = this.splitMulti(jsonArr, ["'],['", "'], ['"]);
@@ -347,9 +358,10 @@ export default {
       if (this.selectedSpell.id === undefined) {
         return;
       }
-      const existingSpell = this.addedSpells.find(x => x.id === spell.id);
+      const existingSpell = this.addedSpellsLocal.find(x => x.id === spell.id);
       if (existingSpell === undefined) {
-        this.addedSpells.push(spell);
+        this.addedSpellsLocal.push(spell);
+        this.$emit("spellAdded", spell.id);
       }
     },
 
@@ -528,6 +540,7 @@ export default {
 }
 .grid-left-top {
   grid-area: left-top;
+  overflow: scroll;
   /* background-color: red; */
 }
 .grid-left-bottom {

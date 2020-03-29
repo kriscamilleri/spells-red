@@ -42,7 +42,12 @@
           ></spell-filters>
         </div>
         <!-- <add-spell></add-spell> -->
-        <favorites-modal :spells="filteredSpells"></favorites-modal>
+        <favorites-modal
+          @spellAdded="captureAddedSpell"
+          @spellRemoved="captureRemovedSpell"
+          :added-spells="spellBookSpells"
+          :spells="filteredSpellsNoSpellbook"
+        ></favorites-modal>
         <div id="page-content-wrapper">
           <b-container fluid class>
             <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
@@ -184,6 +189,31 @@ export default {
       }
       return [];
     },
+    spellBookSpells() {
+      if (this.spells && this.spellBookFilter.length > 0) {
+        let spells = this.spells;
+        spells = this.filterSpellBook(spells);
+
+        return spells;
+      }
+      return [];
+    },
+    filteredSpellsNoSpellbook() {
+      var searchText = this.searchText;
+      if (this.spells) {
+        let spells = this.spells;
+        spells = this.filterSearch(spells, searchText);
+        spells = this.filterClasses(spells);
+        spells = this.filterLevels(spells);
+        spells = this.filterSources(spells);
+        spells = this.filterSchools(spells);
+        spells = this.filterConcentration(spells);
+        spells = this.filterRitual(spells);
+
+        return spells;
+      }
+      return [];
+    },
     cappedFilteredSpells() {
       let spells = this.filteredSpells;
       const firstSpellid = (this.currentPage - 1) * this.cardCount;
@@ -200,7 +230,16 @@ export default {
     toggleNextCards() {
       this.cardCount += this.pageSize;
     },
-
+    captureAddedSpell(spellId) {
+      this.spellBookFilter.push(spellId);
+    },
+    captureRemovedSpell(spellId) {
+      // this.spellBookFilter.push(spellId);
+      // console.log(spellId);
+      const filtered = this.spellBookFilter.filter(c => c !== spellId);
+      this.spellBookFilter = [...filtered];
+      // console.log(this.speconllBookFilter);
+    },
     capturePrintToggle(printEnabled) {
       this.printEnabled = printEnabled;
     },
