@@ -11,7 +11,7 @@
           >X</div>
         </div>
       </div>
-      <print :spells="spells"></print>
+      <print :spells="filteredSpells"></print>
     </div>
     <div v-else>
       <meta name="viewport" content="width=device-width, user-scalable=false;" />
