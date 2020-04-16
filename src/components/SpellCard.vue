@@ -24,13 +24,16 @@
         <!-- <b-modal
          :id="'descSpell'+spell.id"
         class="details-text text-justify">-->
-        <b-modal
-          hide-footer
-          size="lg"
-          :id="'descSpell'+spell.id"
-          class="details-text text-justify"
-          :title="spell.name"
-        >
+        <b-modal hide-footer size="lg" :id="'descSpell'+spell.id" class="details-text text-justify">
+          <div slot="modal-title" class="modal-title">
+            {{spell.name}}
+            <img
+              v-on:click="copyToClipboard"
+              class="copy pointer"
+              width="18"
+              src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABcUlEQVRoge2aPUoDQRSAP03YC1gEREvxJ3VAj6ClkDQW5gJ6FNMLVjYhrYeIBxDJAYIgYmcXcC1WcR1fzOzs7Oy4vA+meMPMy/vIvJCdBBRF+Yu1JfMtYAgMgI1g1Xxz/TmsaQtzLWACnPqoyJHNohvWhbkh9Uo4IYkMglfhAelomW/rFXAfoJY8jz6SPABpbvR9JK0a6Wj9SxojIvWILQlwDOx5qmUVr8Ad8Gy7waZHdoCZsS7EeAPOfIkkNUl8jQXQM4t26ZETYNdhny/awKU0WZQDI54DU5eKCrAFHOXirrnARSQx4inVfxvo81PErKE5H78qEhsqEhsqEhsqEhsqEhsqEhsqEhsqEhsqEhvSM/sN0MnFs0C1lEISGQWvwgONOVqNEXG513o34m2q/w3l0IhTc4GLyJPwIhOHPGWY+0jSIbsVr+sSOwXOfYhAdrW/qElijNDby/4wYEMPuAD2S+ax5YVM4pbffaooygo+AD9wo9/1G37ZAAAAAElFTkSuQmCC"
+            />
+          </div>
           <div class="modal-stats shadow-sm">
             <span class="badge-shrinker float-right">
               <b-badge variant="warning" v-if="spell.conc == true" class="mr-1">Concentration</b-badge>
@@ -92,6 +95,18 @@ export default {
       }
       str = str.split(tempChar);
       return str;
+    },
+    copyToClipboard() {
+      let str = document.querySelector(".modal-dialog").innerText;
+      console.log(str);
+
+      function listener(e) {
+        e.clipboardData.setData("text/plain", str);
+        e.preventDefault();
+      }
+      document.addEventListener("copy", listener);
+      document.execCommand("copy");
+      document.removeEventListener("copy", listener);
     }
   },
   watch: {},
@@ -169,6 +184,22 @@ article.card {
 }
 .card:focus {
   outline: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.copy {
+  transition: all 0.3s ease-in-out;
+}
+.copy:hover {
+  width: 20px;
+}
+
+.copy:active {
+  transition: all 0.1s ease-in-out;
+  width: 17px;
 }
 /* 
 .card:hover {

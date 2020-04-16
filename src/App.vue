@@ -317,6 +317,10 @@ export default {
       if (levelFilters.length != this.levels.length) {
         spells = spells.filter(function(spell) {
           let x = spell.level;
+          console.log(x);
+          if (spell.level == "Cantrip") {
+            x = "0";
+          }
           let intersection = levelFilters.includes(parseInt(x));
           if (intersection) {
             return spell;
