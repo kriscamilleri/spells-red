@@ -131,7 +131,7 @@ export default {
         "warlock",
         "wizard"
       ],
-      sourceFilters: ["EE", "PHB", "SCAG", "XGTE"],
+      sourceFilters: ["EE", "PHB", "SCAG", "XGTE", "TCE"],
       levelFilters: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       schoolFilters: [
         "Abjuration",
@@ -146,6 +146,7 @@ export default {
       concentrationFilters: ["True", "False"],
       ritualFilters: ["True", "False"],
       classes: [
+        "artificer",
         "bard",
         "cleric",
         "druid",
