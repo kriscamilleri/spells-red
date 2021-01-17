@@ -122,6 +122,7 @@ export default {
       pageSize: 20,
       cardCount: 20,
       classFilters: [
+        "artificer",
         "bard",
         "cleric",
         "druid",
