@@ -8,13 +8,18 @@
           <div
             class="btn btn-dark close-button btn-sm float-right print-d-none"
             @click="printEnabled = false"
-          >X</div>
+          >
+            X
+          </div>
         </div>
       </div>
       <print :spells="filteredSpells"></print>
     </div>
     <div v-else>
-      <meta name="viewport" content="width=device-width, user-scalable=false;" />
+      <meta
+        name="viewport"
+        content="width=device-width, user-scalable=false;"
+      />
       <spell-nav-bar
         @sideBarOn="captureSideBarStatus"
         @searchText="captureSearchText"
@@ -25,7 +30,7 @@
       ></spell-nav-bar>
       <div id="wrapper" :class="{ toggled: sideBarOn }" class="pt-2">
         <div id="sidebar-wrapper" class="nav-bg">
-          <spell-filters
+          <filters-modal
             @sideBarOn="captureSideBarStatus"
             :classFilters="classFilters"
             @classFilters="captureClassFilters"
@@ -39,7 +44,7 @@
             @ritualFilters="captureRitualFilters"
             :concentrationFilters="concentrationFilters"
             @concentrationFilters="captureConcentrationFilters"
-          ></spell-filters>
+          ></filters-modal>
         </div>
         <!-- <add-spell></add-spell> -->
         <favorites-modal
@@ -50,8 +55,17 @@
         ></favorites-modal>
         <div id="page-content-wrapper">
           <b-container fluid class>
-            <b-row :class="{ 'd-none': dataLoading }" id="spellContainer" align-h="center">
-              <spell-card v-for="r in cappedFilteredSpells" :spell="r" :key="r.id" class="m-2"></spell-card>
+            <b-row
+              :class="{ 'd-none': dataLoading }"
+              id="spellContainer"
+              align-h="center"
+            >
+              <spell-card
+                v-for="r in cappedFilteredSpells"
+                :spell="r"
+                :key="r.id"
+                class="m-2"
+              ></spell-card>
             </b-row>
             <b-row>
               <b-col class="d-flex">
@@ -62,7 +76,9 @@
                   "
                   align="center"
                   v-on:click="toggleNextCards"
-                >Load More [{{ cardCount }}/{{ filteredSpells.length }}]</div>
+                >
+                  Load More [{{ cardCount }}/{{ filteredSpells.length }}]
+                </div>
               </b-col>
             </b-row>
             <div v-if="dataLoading" class="text-center p-5">
@@ -97,7 +113,7 @@ Shadow on filters
 import SpellNavBar from "./components/SpellNavBar.vue";
 import SpellCard from "./components/SpellCard.vue";
 import Print from "./components/Print.vue";
-import SpellFilters from "./components/SpellFilters.vue";
+import FiltersModal from "./components/FiltersModal.vue";
 import FavoritesModal from "./components/FavoritesModal.vue";
 
 export default {
@@ -107,7 +123,7 @@ export default {
     Print,
     FavoritesModal,
     SpellNavBar,
-    SpellFilters
+    FiltersModal,
   },
   data() {
     return {
@@ -130,7 +146,7 @@ export default {
         "ranger",
         "sorcerer",
         "warlock",
-        "wizard"
+        "wizard",
       ],
       sourceFilters: ["EE", "PHB", "SCAG", "XGTE", "TCE"],
       levelFilters: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -142,7 +158,7 @@ export default {
         "Evocation",
         "Illusion",
         "Necromancy",
-        "Transmutation"
+        "Transmutation",
       ],
       concentrationFilters: ["True", "False"],
       ritualFilters: ["True", "False"],
@@ -155,7 +171,7 @@ export default {
         "ranger",
         "sorcerer",
         "warlock",
-        "wizard"
+        "wizard",
       ],
       levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
       sources: ["EE", "PHB", "SCAG", "XGtE"],
@@ -167,14 +183,14 @@ export default {
         "Evocation",
         "Illusion",
         "Necromancy",
-        "Transmutation"
+        "Transmutation",
       ],
       printEnabled: false,
-      lastElemY: Number
+      lastElemY: Number,
     };
   },
   computed: {
-    filteredSpells: function() {
+    filteredSpells: function () {
       var searchText = this.searchText;
       if (this.spells) {
         let spells = this.spells;
@@ -226,7 +242,7 @@ export default {
     },
     spellSize() {
       return this.spells.length;
-    }
+    },
   },
   methods: {
     toggleNextCards() {
@@ -238,7 +254,7 @@ export default {
     captureRemovedSpell(spellId) {
       // this.spellBookFilter.push(spellId);
       // console.log(spellId);
-      const filtered = this.spellBookFilter.filter(c => c !== spellId);
+      const filtered = this.spellBookFilter.filter((c) => c !== spellId);
       this.spellBookFilter = [...filtered];
       // console.log(this.speconllBookFilter);
     },
@@ -273,14 +289,9 @@ export default {
     },
     filterSearch(spells, searchText) {
       if (searchText.length > 0) {
-        spells = spells.filter(function(spell) {
+        spells = spells.filter(function (spell) {
           let lowerText = searchText.toLowerCase();
-          return (
-            spell.name
-              .toLowerCase()
-              .trim()
-              .indexOf(lowerText) > -1
-          );
+          return spell.name.toLowerCase().trim().indexOf(lowerText) > -1;
         });
       }
       return spells;
@@ -291,22 +302,22 @@ export default {
       }
 
       const filteredSpells = spells.filter(
-        c => this.spellBookFilter.indexOf(parseInt(c.id)) !== -1
+        (c) => this.spellBookFilter.indexOf(parseInt(c.id)) !== -1
       );
       return filteredSpells;
     },
     filterClasses(spells) {
-      let classFilters = this.classFilters.map(function(value) {
+      let classFilters = this.classFilters.map(function (value) {
         return value[0].toUpperCase() + value.slice(1);
       });
 
       if (this.classFilters.length != this.classes.length) {
-        spells = spells.filter(function(spell) {
-          let x = spell.class.split(",").map(c => {
+        spells = spells.filter(function (spell) {
+          let x = spell.class.split(",").map((c) => {
             return c.trim();
           });
-          console.log(x);
-          let intersection = x.filter(n => classFilters.includes(n));
+          // console.log(x);
+          let intersection = x.filter((n) => classFilters.includes(n));
           if (intersection.length > 0) {
             return spell;
           }
@@ -317,9 +328,9 @@ export default {
     filterLevels(spells) {
       let levelFilters = this.levelFilters;
       if (levelFilters.length != this.levels.length) {
-        spells = spells.filter(function(spell) {
+        spells = spells.filter(function (spell) {
           let x = spell.level;
-          console.log(x);
+          // console.log(x);
           if (spell.level == "Cantrip") {
             x = "0";
           }
@@ -334,9 +345,9 @@ export default {
     filterSources(spells) {
       let sourceFilters = this.sourceFilters;
       if (sourceFilters.length != this.sources.length) {
-        spells = spells.filter(function(spell) {
+        spells = spells.filter(function (spell) {
           let source = spell.page.split(" ")[0].toUpperCase();
-          console.log(source + ", " + sourceFilters);
+          // console.log(source + ", " + sourceFilters);
           let intersection = sourceFilters.includes(source);
           if (intersection) {
             return spell;
@@ -348,7 +359,7 @@ export default {
     filterSchools(spells) {
       let schoolFilters = this.schoolFilters;
       if (schoolFilters.length != this.schools.length) {
-        spells = spells.filter(function(spell) {
+        spells = spells.filter(function (spell) {
           let x = spell.school;
           let intersection = schoolFilters.includes(x);
           if (intersection) {
@@ -366,9 +377,9 @@ export default {
       ) {
         return spells;
       }
-      spells = spells.filter(function(spell) {
-        let x = spell.conc;
-        console.log(x);
+      spells = spells.filter(function (spell) {
+        // let x = spell.conc;
+        // console.log(x);
         if (concentrationFilters.includes("True") && spell.conc === true) {
           return spell;
         }
@@ -386,9 +397,7 @@ export default {
       if (ritualFilters.includes("True") && ritualFilters.includes("False")) {
         return spells;
       }
-      spells = spells.filter(function(spell) {
-        let x = spell.ritual;
-        console.log(x);
+      spells = spells.filter(function (spell) {
         if (ritualFilters.includes("True") && spell.ritual === true) {
           return spell;
         }
@@ -400,13 +409,13 @@ export default {
     },
     parseSpells(url) {
       fetch(url)
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
             throw new Error("HTTP error " + response.status);
           }
           return response.json();
         })
-        .then(data => {
+        .then((data) => {
           this.spells = data.sort((a, b) => {
             const concatA =
               a.level != "Cantrip" ? `${a.level}${a.name}` : `${0}${a.name}`;
@@ -423,14 +432,14 @@ export default {
       let spellsString = params.get("spellbook");
       let spellBookTitle = params.get("spellbookname");
       if (spellsString) {
-        this.spellBookFilter = spellsString.split("-").map(c => parseInt(c));
+        this.spellBookFilter = spellsString.split("-").map((c) => parseInt(c));
       }
       if (spellBookTitle) {
         this.spellBookTitle = spellBookTitle + ` - ${this.spellBookTitle}`;
         this.navTitle = spellBookTitle;
       }
 
-      console.log(this.spellBookTitle);
+      // console.log(this.spellBookTitle);
     },
     resetInfiniteScroll() {
       this.cardCount = this.pageSize;
@@ -481,7 +490,7 @@ export default {
         document.body.classList.add("user-is-tabbing");
         window.removeEventListener("keydown", this.showOutline);
       }
-    }
+    },
   },
   watch: {
     searchText() {
@@ -504,7 +513,7 @@ export default {
     },
     concentrationFilters() {
       this.resetInfiniteScroll();
-    }
+    },
   },
   mounted() {
     window.addEventListener("keydown", this.showOutline);
@@ -515,7 +524,7 @@ export default {
     this.parseSpells(url);
     this.updateLastElementYPosition();
     this.scroll();
-  }
+  },
 };
 </script>
 
@@ -687,12 +696,9 @@ body:not(.user-is-tabbing) textarea:focus {
   margin-right: 15px;
   margin-right: 15px;
 }
-
-/* SIDEBAR */
-html {
+/* 
+SIDEBAR html {
   font-size: 1.1rem;
-  /* background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); */
-  /* background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%); */
   height: 100%;
 }
 html > body {
@@ -704,12 +710,12 @@ html > body {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-}
-
+} */
+/* 
 #sidebar-wrapper {
   z-index: 1029;
   position: fixed;
-  height: calc(100% - 2rem);
+  height: 100%; 
   overflow-y: auto;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -726,11 +732,10 @@ html > body {
 
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
-  /* margin-left: -380px; */
-}
+} */
 
 /* Sidebar Styles */
-
+/* 
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -764,7 +769,7 @@ html > body {
 }
 #wrapper.toggled #sidebar-wrapper {
   transform: translateX(0vw);
-}
+} */
 
 :root {
   --modal-container-footer: 14rem;
@@ -795,14 +800,14 @@ h6,
   #wrapper {
     padding-right: 0;
   }
-
+  /* 
   #sidebar-wrapper {
     width: 40vw;
     transform: translateX(100vw);
   }
   #wrapper.toggled #sidebar-wrapper {
     transform: translateX(60vw);
-  }
+  } */
   #page-content-wrapper {
     position: relative;
   }

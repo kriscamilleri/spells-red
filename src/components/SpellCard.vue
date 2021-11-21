@@ -8,25 +8,39 @@
       :border-variant="classColor"
       header-bg-variant="primary"
       header-text-variant="white"
-      v-b-modal="'descSpell'+spell.id"
+      v-b-modal="'descSpell' + spell.id"
     >
       <h4
         class="card-title text-primary"
         data-toggle="collapse"
         aria-controls="collapseOne"
-      >{{spell.name}}</h4>
-      <h6 class="card-subtitle mb-2 text-muted" v-html="formattedSubtitle(spell)"></h6>
+      >
+        {{ spell.name }}
+      </h4>
+      <h6
+        class="card-subtitle mb-2 text-muted"
+        v-html="formattedSubtitle(spell)"
+      ></h6>
       <span class="badge-shrinker align-middle">
-        <b-badge variant="warning" v-if="spell.conc == true" class="mr-1">Concentration</b-badge>
-        <b-badge variant="success" v-if="spell.ritual == true" class="mr-1">Ritual</b-badge>
+        <b-badge variant="warning" v-if="spell.conc == true" class="mr-1"
+          >Concentration</b-badge
+        >
+        <b-badge variant="success" v-if="spell.ritual == true" class="mr-1"
+          >Ritual</b-badge
+        >
       </span>
       <p class="card-text text-sm text-muted" align-h="start">
         <!-- <b-modal
          :id="'descSpell'+spell.id"
         class="details-text text-justify">-->
-        <b-modal hide-footer size="lg" :id="'descSpell'+spell.id" class="details-text text-justify">
+        <b-modal
+          hide-footer
+          size="lg"
+          :id="'descSpell' + spell.id"
+          class="details-text text-justify"
+        >
           <div slot="modal-title" class="modal-title">
-            {{spell.name}}
+            {{ spell.name }}
             <img
               v-on:click="copyToClipboard"
               class="copy pointer"
@@ -36,19 +50,29 @@
           </div>
           <div class="modal-stats shadow-sm">
             <span class="badge-shrinker float-right">
-              <b-badge variant="warning" v-if="spell.conc == true" class="mr-1">Concentration</b-badge>
-              <b-badge variant="success" v-if="spell.ritual == true" class="mr-1">Ritual</b-badge>
+              <b-badge variant="warning" v-if="spell.conc == true" class="mr-1"
+                >Concentration</b-badge
+              >
+              <b-badge
+                variant="success"
+                v-if="spell.ritual == true"
+                class="mr-1"
+                >Ritual</b-badge
+              >
             </span>
             <p class="card-subtitle" v-html="formattedSubtitle(spell)"></p>
           </div>
           <div class="text-primary">Description</div>
-          <span class="text-justify" v-html="formattedDescription(spell)"></span>
+          <span
+            class="text-justify"
+            v-html="formattedDescription(spell)"
+          ></span>
           <div class="text-primary">Classes</div>
-          <p>{{spell.class}}</p>
+          <p>{{ spell.class }}</p>
           <div class="text-primary">Components</div>
           <p v-html="formattedComponents(spell)"></p>
           <div class="text-primary">School</div>
-          <p>{{spell.school}}</p>
+          <p>{{ spell.school }}</p>
         </b-modal>
       </p>
     </b-card>
@@ -76,8 +100,8 @@ export default {
       school: String,
       class: Array,
       source: String,
-      page: String
-    }
+      page: String,
+    },
   },
   methods: {
     expandCard() {},
@@ -98,7 +122,7 @@ export default {
     },
     copyToClipboard() {
       let str = document.querySelector(".modal-dialog").innerText;
-      console.log(str);
+      // console.log(str);
 
       function listener(e) {
         e.clipboardData.setData("text/plain", str);
@@ -107,14 +131,14 @@ export default {
       document.addEventListener("copy", listener);
       document.execCommand("copy");
       document.removeEventListener("copy", listener);
-    }
+    },
   },
   watch: {},
   computed: {
-    classColor: function() {
+    classColor: function () {
       return "muted";
-    }
-  }
+    },
+  },
 };
 //Stacked progress bar to denote spell class requirement
 </script>

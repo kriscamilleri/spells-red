@@ -1,8 +1,12 @@
 <template>
   <b-navbar toggleable="md" class="nav-bg shadow-sm fixed-top">
     <b-navbar-brand class="mega-brand text-primary" href="#">
-      <img src="/img/icons/android-chrome-48x48.png" width="36" class="nav-brand-icon mr-1" />
-      {{navTitle}}
+      <img
+        src="/img/icons/android-chrome-48x48.png"
+        width="36"
+        class="nav-brand-icon mr-1"
+      />
+      {{ navTitle }}
     </b-navbar-brand>
     <b-form-input
       size="md"
@@ -12,7 +16,10 @@
       v-model="localSearchText"
       placeholder="Search"
     />
-    <b-navbar-toggle target="nav_collapse" class="float-right navbar-toggle"></b-navbar-toggle>
+    <b-navbar-toggle
+      target="nav_collapse"
+      class="float-right navbar-toggle"
+    ></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse" class>
       <div id="collapse_container" class="p-2 mt-2">
         <b-navbar-nav>
@@ -21,7 +28,8 @@
             class="nav-button my-2 mx-2 btn-dark float-left shadow-sm"
             target="_blank"
             size="sm"
-          >Github</b-nav-item>
+            >Github</b-nav-item
+          >
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -30,20 +38,23 @@
             size="sm"
             class="my-2 mx-2 nav-button btn-success shadow-sm"
             v-on:click="togglePrint"
-          >Print</b-nav-item>
+            >Print</b-nav-item
+          >
           <b-nav-item
             size="sm"
             class="my-2 mx-2 nav-button btn-primary shadow-sm"
             v-b-modal="'favoritesModal'"
-          >Spellbook</b-nav-item>
+            >Spellbook</b-nav-item
+          >
           <b-nav-item
             href="#menu-toggle"
             class="my-2 mx-2 nav-button btn-info shadow-sm"
-            :class="{ active: sideBarOn}"
+            :class="{ active: sideBarOn }"
             size="sm"
-            v-on:click.prevent="toggleSideBar"
             id="menu-toggle"
-          >Filter</b-nav-item>
+            v-b-modal="'filtersModal'"
+            >Filter</b-nav-item
+          >
         </b-navbar-nav>
         <div class="input-group mx-2">
           <b-form-input
@@ -54,7 +65,9 @@
             v-model="localSearchText"
             placeholder="Search"
           />
-          <a target="_self" href="#" class="navbar-brand mini-brand">CC's Spell Search</a>
+          <a target="_self" href="#" class="navbar-brand mini-brand"
+            >CC's Spell Search</a
+          >
         </div>
       </div>
     </b-collapse>
@@ -67,30 +80,33 @@ export default {
   data() {
     return {
       printEnabled: false,
-      localSearchText: ""
+      localSearchText: "",
     };
   },
   props: {
     sideBarOn: Boolean,
-    navTitle: String
+    navTitle: String,
     // spells: []
   },
   methods: {
-    toggleSideBar: function() {
-      this.$emit("sideBarOn", !this.sideBarOn);
-    },
-    toggleSearch: function() {
+    // toggleSideBar: function () {
+    //   this.$emit("sideBarOn", !this.sideBarOn);
+    // },
+    toggleSearch: function () {
       this.$emit("searchText", this.localSearchText);
     },
-    togglePrint: function() {
+    togglePrint: function () {
       console.log("print toggled");
       this.printEnabled = !this.printEnabled;
       this.$emit("printEnabled", this.printEnabled);
-    }
+    },
+    hideModal: function () {
+      this.$refs["filtersModal"].hide();
+    },
   },
   created() {
-    this.sideBarOn = false;
-  }
+    // this.sideBarOn = false;
+  },
 };
 </script>
 

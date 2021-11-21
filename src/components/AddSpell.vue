@@ -4,8 +4,9 @@
       :variant="dismissableAlertType"
       dismissible
       :show="showDismissibleAlert"
-      @dismissed="showDismissibleAlert=false"
-    >{{dismissableAlertMessage}}</b-alert>
+      @dismissed="showDismissibleAlert = false"
+      >{{ dismissableAlertMessage }}</b-alert
+    >
     <b-modal
       title="Add Spell"
       id="spellModal"
@@ -22,7 +23,11 @@
             <strong>Name</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="nameInput" name="nameInput" placeholder="ex. Magic Missile" />
+            <b-input
+              id="nameInput"
+              name="nameInput"
+              placeholder="ex. Magic Missile"
+            />
           </b-input-group>
           <br />
         </div>
@@ -46,7 +51,10 @@
           <label class="d-block" for="descInput">
             <strong>Description</strong>
           </label>
-          <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0 max-width-override">
+          <b-input-group
+            left="@"
+            class="mb-2 mr-sm-2 mb-sm-0 max-width-override"
+          >
             <textarea
               rows="3"
               name="descInput"
@@ -62,7 +70,10 @@
           <label class="d-block" for="highersInput">
             <strong>Higher Levels</strong>
           </label>
-          <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0 max-width-override">
+          <b-input-group
+            left="@"
+            class="mb-2 mr-sm-2 mb-sm-0 max-width-override"
+          >
             <textarea
               rows="3"
               name="highersInput"
@@ -79,7 +90,11 @@
             <strong>Classes</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="classInput" name="classInput" placeholder="ex. Wizard, Sorcerer, Druid" />
+            <b-input
+              id="classInput"
+              name="classInput"
+              placeholder="ex. Wizard, Sorcerer, Druid"
+            />
           </b-input-group>
           <br />
         </div>
@@ -89,7 +104,11 @@
             <strong>Range</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="rangeInput" name="rangeInput" placeholder="ex. 50 feet" />
+            <b-input
+              id="rangeInput"
+              name="rangeInput"
+              placeholder="ex. 50 feet"
+            />
           </b-input-group>
           <br />
         </div>
@@ -98,7 +117,11 @@
             <strong>Duration</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="durationInput" name="durationInput" placeholder="ex. 1 minute" />
+            <b-input
+              id="durationInput"
+              name="durationInput"
+              placeholder="ex. 1 minute"
+            />
           </b-input-group>
           <br />
         </div>
@@ -107,7 +130,11 @@
             <strong>Casting Time</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="castingInput" name="castingInput" placeholder="ex. 1 minute" />
+            <b-input
+              id="castingInput"
+              name="castingInput"
+              placeholder="ex. 1 minute"
+            />
           </b-input-group>
           <br />
         </div>
@@ -116,7 +143,11 @@
             <strong>School</strong>
           </label>
           <b-input-group left="@" class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="schoolInput" name="schoolInput" placeholder="ex Necromancy" />
+            <b-input
+              id="schoolInput"
+              name="schoolInput"
+              placeholder="ex Necromancy"
+            />
           </b-input-group>
           <br />
         </div>
@@ -236,7 +267,7 @@ export default {
     return {
       showDismissibleAlert: false,
       dismissableAlertType: "success",
-      dismissableAlertMessage: ""
+      dismissableAlertMessage: "",
     };
   },
   methods: {
@@ -253,8 +284,8 @@ export default {
       let somaticInput = document.getElementById("somaticInput").value;
       let verbalInput = document.getElementById("verbalInput").value;
       let ritualInput = document.getElementById("ritualInput").value;
-      let materialCostInput = document.getElementById("materialCostInput")
-        .value;
+      let materialCostInput =
+        document.getElementById("materialCostInput").value;
       let materialInput = document.getElementById("materialInput").value;
       let pageInput = document.getElementById("pageInput").value;
       let concInput = document.getElementById("concInput").value;
@@ -278,18 +309,18 @@ export default {
           materialCostInput: materialCostInput,
           materialInput: materialInput,
           pageInput: pageInput,
-          concInput: concInput
+          concInput: concInput,
         }), // data can be `string` or {object}!
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       })
-        .then(response => response.text())
-        .then(text => this.showAlert(text));
+        .then((response) => response.text())
+        .then((text) => this.showAlert(text));
     },
     showAlert(message) {
       this.dismissableAlertMessage = message;
-      console.log(message);
+      // console.log(message);
       if (message.toLowerCase().indexOf("success") == 0) {
         this.showDismissibleAlert = true;
         this.dismissableAlertType = "success";
@@ -297,8 +328,8 @@ export default {
         this.showDismissibleAlert = true;
         this.dismissableAlertType = "danger";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

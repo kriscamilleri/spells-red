@@ -12,12 +12,12 @@
         <div class="grid-container">
           <div class="grid-top">
             <p class="d-block">
-              Select as many spells as you'd like from below, give your Spellbook
-              a name, and click Open Spellbook to open a new page with only the
-              spells you selected.
+              Select as many spells as you'd like from below, give your
+              Spellbook a name, and click Open Spellbook to open a new page with
+              only the spells you selected.
             </p>
           </div>
-          <div class="grid-left-top border border-primary shadow-sm">
+          <div class="grid-left-bottom rounded-lg border border-muted shadow">
             <div class id="yourSpellbook">
               <div class>
                 <div class="added-container">
@@ -31,8 +31,13 @@
                         placeholder="ex. Perrywook's Book"
                         v-model="spellBookName"
                         />-->
-                        <label class="sr-only" for="inline-form-input-username">Spellbook Name</label>
-                        <b-input-group prepend="Spellbook Name" class="mb-2 mr-sm-2 mb-sm-0">
+                        <label class="sr-only" for="inline-form-input-username"
+                          >Spellbook Name</label
+                        >
+                        <b-input-group
+                          prepend="Spellbook Name"
+                          class="mb-2 mr-sm-2 mb-sm-0"
+                        >
                           <b-input
                             id="inline-form-input-username"
                             placeholder="Name your spellbook"
@@ -40,7 +45,9 @@
                           ></b-input>
                         </b-input-group>
                         <h5 class="mt-4">Added Spells</h5>
-                        <p v-if="addedSpellsLocal.length < 1">No spells selected.</p>
+                        <p v-if="addedSpellsLocal.length < 1">
+                          No spells selected.
+                        </p>
 
                         <span
                           v-for="spell in addedSpellsLocal"
@@ -50,9 +57,9 @@
                         >
                           <small>{{ spell.level }}</small>
                           {{ spell.name }}
-                          <small
-                            class="border-primary border-left px-1"
-                          >X</small>
+                          <small class="border-primary border-left px-1"
+                            >X</small
+                          >
                         </span>
                       </div>
                     </div>
@@ -61,10 +68,21 @@
               </div>
             </div>
           </div>
-          <div class="grid-left-bottom border border-secondary shadow-sm p-3">
-            <div class="input-group">
+          <div class="grid-left-top border rounded-lg border-muted shadow">
+            <div class="input-group border-bottom">
               <div class="input-group-prepend">
-                <span class="input-group-text border-bottom-square">Search</span>
+                <span
+                  class="
+                    border border-primary
+                    input-group-text
+                    border-bottom-square
+                    bg-primary
+                    text-white
+                    border-radius-none
+                    search-prepend
+                  "
+                  >Search</span
+                >
               </div>
               <input
                 type="text"
@@ -73,7 +91,7 @@
                 placeholder="Search for spells"
               />
             </div>
-            <div class="search-container-parent border">
+            <div class="search-container-parent">
               <div class="search-container border">
                 <div class="card-sm">
                   <ul class="list-group list-group-flush">
@@ -84,21 +102,31 @@
                       v-on:click="selectSpell(spell.id)"
                       :spell="spell"
                       :key="spell.id"
-                    >{{ spell.name }}</li>
-                    <li class="list-group-item" v-if="filteredSpells.length === 0">No spells found.</li>
+                    >
+                      {{ spell.name }}
+                    </li>
+                    <li
+                      class="list-group-item"
+                      v-if="filteredSpells.length === 0"
+                    >
+                      No spells found.
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <div class="grid-right border border-secondary shadow-sm">
+          <div class="grid-right border border-muted shadow rounded-lg">
             <div id="infoContainer" class="info-container">
-              <div id="infoSubcontainer" class="info-subcontainer align-self-top">
+              <div
+                id="infoSubcontainer"
+                class="info-subcontainer align-self-top"
+              >
                 <span class="info-header">
                   <h3>{{ selectedSpell.name }}</h3>
-                  <h5
-                    v-if="selectedSpell.level"
-                  >Level {{ selectedSpell.level }} - {{ selectedSpell.school }}</h5>
+                  <h5 v-if="selectedSpell.level">
+                    Level {{ selectedSpell.level }} - {{ selectedSpell.school }}
+                  </h5>
                   <small class="text-primary">{{ selectedSpell.class }}</small>
                 </span>
                 <!-- <div
@@ -107,13 +135,23 @@
                   v-html="extendedDescription"
                 ></div>-->
                 <span class="extended-description text-justify">
-                  <strong v-if="selectedSpell.id" class="d-block pt-2 text-primary">Description</strong>
+                  <strong
+                    v-if="selectedSpell.id"
+                    class="d-block pt-2 text-primary"
+                    >Description</strong
+                  >
                   <span v-html="formattedDescription"></span>
-                  <strong v-if="selectedSpell.id" class="text-primary">Classes</strong>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >Classes</strong
+                  >
                   <p>{{ selectedSpell.class }}</p>
-                  <strong v-if="selectedSpell.id" class="text-primary">Components</strong>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >Components</strong
+                  >
                   <p v-html="formattedComponents"></p>
-                  <strong v-if="selectedSpell.id" class="text-primary">School</strong>
+                  <strong v-if="selectedSpell.id" class="text-primary"
+                    >School</strong
+                  >
                   <p>{{ selectedSpell.school }}</p>
                 </span>
               </div>
@@ -126,17 +164,20 @@
                 class="btn btn-dark float-right"
                 :class="nextEnabled ? '' : 'disabled'"
                 v-on:click="nextPage()"
-              >Next</span>
+                >Next</span
+              >
               <span
                 class="btn btn-dark float-left"
                 :class="previousEnabled ? '' : 'disabled'"
                 v-on:click="previousPage()"
-              >Previous</span>
+                >Previous</span
+              >
               <span
                 :class="selectedSpell.id === undefined ? 'disabled' : ''"
                 class="btn btn-primary align-bottom"
                 v-on:click="addSpell(selectedSpell)"
-              >Add Spell</span>
+                >Add Spell</span
+              >
             </div>
           </div>
         </div>
@@ -150,8 +191,15 @@
             :class="addedSpellsLocal.length === 0 ? 'disabled' : 'false'"
             :href="generatedLink"
             target="_blank"
-          >Open Spellbook</b-button>
-          <b-button variant="dark" size class="float-right mx-1" v-on:click="hideModal">Cancel</b-button>
+            >Open Spellbook</b-button
+          >
+          <b-button
+            variant="dark"
+            size
+            class="float-right mx-1"
+            v-on:click="hideModal"
+            >Cancel</b-button
+          >
         </div>
       </template>
     </b-modal>
@@ -163,7 +211,7 @@ export default {
   name: "FavoritesModal",
   props: {
     spells: Array,
-    addedSpells: Array
+    addedSpells: Array,
   },
   data() {
     return {
@@ -175,26 +223,26 @@ export default {
       pageCount: 0,
       paginationEnabled: true,
       nextEnabled: true,
-      previousEnabled: true
+      previousEnabled: true,
       // generatedLink: ""
     };
   },
   computed: {
-    filteredSpells: function() {
+    filteredSpells: function () {
       const searchString = this.searchString.toLowerCase();
       let spells = this.spells.filter(
-        c => c.name.toLowerCase().indexOf(searchString) != -1
+        (c) => c.name.toLowerCase().indexOf(searchString) != -1
       );
       return spells;
     },
-    extendedDescription: function() {
+    extendedDescription: function () {
       if (this.selectedSpell) {
         return this.selectedSpell.desc + "<p class='extended-description'></p>";
       }
       return "<p class='extended-description'></p>";
     },
-    generatedLink: function() {
-      const spellList = this.addedSpellsLocal.map(c => c.id);
+    generatedLink: function () {
+      const spellList = this.addedSpellsLocal.map((c) => c.id);
       const joinedSpells = spellList.join("-");
       const url = `${window.location.protocol}//${window.location.host}?spellbookname=${this.spellBookName}&spellbook=${joinedSpells}`;
       return url;
@@ -209,7 +257,7 @@ export default {
           } Spellbook`
         : "Your Spellbook";
     },
-    formattedSubtitle: function() {
+    formattedSubtitle: function () {
       return (
         this.formattedLevel +
         ", " +
@@ -221,24 +269,24 @@ export default {
         "."
       );
     },
-    formattedLevel: function() {
+    formattedLevel: function () {
       return (
         "<strong class='text-danger'>" + this.selectedSpell.level + "</strong>"
       );
     },
-    formattedRange: function() {
+    formattedRange: function () {
       return (
         "<strong class='text-info'>Range&nbsp;</strong>" +
         this.selectedSpell.range.replace("feet", "Feet")
       );
     },
-    formattedDetails: function() {
+    formattedDetails: function () {
       let description = this.formattedDescription;
       let classes = this.formattedClasses;
       let components = this.formattedComponents;
       return description + classes + components;
     },
-    formattedClasses: function() {
+    formattedClasses: function () {
       // let classArr = this.spell.class;
       let classArray = this.selectedSpell.class.split(",");
 
@@ -247,7 +295,7 @@ export default {
 
       return classes;
     },
-    formattedDescription: function() {
+    formattedDescription: function () {
       if (this.selectedSpell.id) {
         let description = this.convertJsonArrayToHtml(this.selectedSpell.desc);
         if (this.selectedSpell.higher) {
@@ -260,7 +308,7 @@ export default {
       }
       return "";
     },
-    formattedDuration: function() {
+    formattedDuration: function () {
       let result = "<strong class='text-warning'>Duration&nbsp;</strong>";
       if (this.selectedSpell.conc && this.selectedSpell.duration.length > 0) {
         let cleanedDuration = this.selectedSpell.duration;
@@ -271,13 +319,13 @@ export default {
       }
       return result; // capitalize first letter
     },
-    formattedcasting: function() {
+    formattedcasting: function () {
       return (
         "<strong class='text-success'>Casting&nbsp;</strong>" +
         this.selectedSpell.casting
       );
     },
-    formattedComponents: function() {
+    formattedComponents: function () {
       let array = [];
       if (this.selectedSpell.components) {
         if (this.selectedSpell.components.includes("V")) {
@@ -295,15 +343,15 @@ export default {
       }
       return "";
     },
-    classColor: function() {
+    classColor: function () {
       return "muted";
-    }
+    },
   },
   watch: {
     addedSpells() {
       const self = this;
       self.addedSpellsLocal = [...self.addedSpells]; //forEach(c => self.addedSpellsLocal.push(c));
-    }
+    },
   },
   created() {},
   mounted() {
@@ -314,7 +362,7 @@ export default {
     // window.addEventListener("resize", this.handleResize);
 
     let executable;
-    window.onresize = function() {
+    window.onresize = function () {
       clearTimeout(executable);
       executable = setTimeout(self.handleResize, 100);
     };
@@ -346,26 +394,28 @@ export default {
       str = str.split(tempChar);
       return str;
     },
-    hideModal: function() {
+    hideModal: function () {
       this.$refs["favoritesModal"].hide();
     },
-    selectSpell: function(id) {
-      this.selectedSpell = this.spells.find(c => c.id === id);
+    selectSpell: function (id) {
+      this.selectedSpell = this.spells.find((c) => c.id === id);
       this.resetPage();
     },
-    addSpell: function(spell) {
+    addSpell: function (spell) {
       //disable button when nothing to add
       if (this.selectedSpell.id === undefined) {
         return;
       }
-      const existingSpell = this.addedSpellsLocal.find(x => x.id === spell.id);
+      const existingSpell = this.addedSpellsLocal.find(
+        (x) => x.id === spell.id
+      );
       if (existingSpell === undefined) {
         this.addedSpellsLocal.push(spell);
         this.$emit("spellAdded", spell.id);
       }
     },
 
-    previousPage: function() {
+    previousPage: function () {
       if (!this.previousEnabled) {
         return;
       }
@@ -378,7 +428,7 @@ export default {
       subcontainer.style.transform = `translateX(calc( -${translate}px - ${translatePadding}rem))`;
       this.togglePaginationButtons();
     },
-    nextPage: function() {
+    nextPage: function () {
       if (!this.nextEnabled) {
         return;
       }
@@ -392,10 +442,10 @@ export default {
       subcontainer.style.transform = `translateX(calc(-${translate}px - ${translatePadding}rem))`;
       this.togglePaginationButtons();
     },
-    togglePaginationButtons: function() {
+    togglePaginationButtons: function () {
       //Caution: Hacky/Fragile stuff ahead
       let self = this;
-      const executable = function() {
+      const executable = function () {
         const infoContainer = document.getElementById("infoContainer");
         const subcontainer = document.getElementById("infoSubcontainer");
         const container = document.getElementById("infoContainer");
@@ -405,8 +455,8 @@ export default {
         let lastChild = subcontainer.lastChild.lastChild;
         lastChild =
           lastChild.innerHTML === "" ? lastChild.previousSibling : lastChild;
-        const infoContainerPosRight = self.getElementOffset(infoContainer)
-          .right;
+        const infoContainerPosRight =
+          self.getElementOffset(infoContainer).right;
         const lastChildPosRight = self.getElementOffset(lastChild).right;
         const scrollDistance = self.pageCount * (self.containerWidth + 15);
         const nextPage = lastChildPosRight > infoContainerPosRight + 17;
@@ -416,15 +466,15 @@ export default {
       };
       this.delayExecution(100, executable);
     },
-    resetPage: function() {
+    resetPage: function () {
       this.paginate();
       this.togglePaginationButtons();
       this.pageCount = 0;
     },
-    paginate: function() {
+    paginate: function () {
       let self = this;
       //TODO: should turn into its own component, however, for now - a timeout should give vue enough time to add the elements to the DOM and allow for position calculations
-      const executable = function() {
+      const executable = function () {
         const subcontainer = document.getElementById("infoSubcontainer");
         const container = document.getElementById("infoContainer");
         self.containerWidth = container.offsetWidth;
@@ -443,16 +493,16 @@ export default {
       };
       this.delayExecution(10, executable);
     },
-    getElementOffset: function(el) {
+    getElementOffset: function (el) {
       const rect = el.getBoundingClientRect();
       return {
         top: rect.top + window.pageYOffset,
         left: rect.left + window.pageXOffset,
         bottom: rect.top + rect.height + window.pageYOffset,
-        right: rect.left + rect.width + window.pageXOffset
+        right: rect.left + rect.width + window.pageXOffset,
       };
     },
-    handleResize: function() {
+    handleResize: function () {
       const subcontainer = document.getElementById("infoSubcontainer");
       const container = document.getElementById("infoContainer");
       this.containerWidth = container ? container.offsetWidth : 0;
@@ -463,21 +513,34 @@ export default {
     },
     delayExecution(milliseconds, executable) {
       const self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         executable(self);
       }, milliseconds);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
+.search-prepend {
+  margin: -1px;
+}
+.border-bottom-square {
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
 @media only screen and (min-width: 600px) {
   .modal-lg .modal-content {
     min-height: 100vh;
     padding: 3rem;
   }
 
+  .body-container {
+    height: calc(100%);
+    padding-bottom: 1rem;
+    overflow: auto;
+  }
   .info-container {
+    margin-right: -0.2px;
     height: calc(100% - var(--info-footer) - 0.6rem);
     padding: 1rem;
     /* max-height: calc(85vh - (var(--info-footer) + var(--modal-container-footer))); */
@@ -533,6 +596,7 @@ export default {
   -moz-column-rule: 1px dotted var(--dark);
   column-rule: 1px dotted var(--dark);*/
   overflow: auto;
+  overflow-x: hidden;
   text-overflow: ellipsis;
 }
 .grid-top {
@@ -540,7 +604,7 @@ export default {
 }
 .grid-left-top {
   grid-area: left-top;
-  overflow: scroll;
+  overflow-y: hidden;
   /* background-color: red; */
 }
 .grid-left-bottom {
@@ -577,7 +641,12 @@ export default {
   /* height: 20rem; */
 }
 .body-container {
-  height: 100%;
+  height: calc(100%);
+  padding-right: 1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  margin-left: -1rem;
+
   overflow: auto;
 }
 .max-height {
@@ -589,7 +658,7 @@ export default {
 }
 .added-container {
   /* max-height: 25rem; */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   overflow-x: hidden;
 }
 .close-button {
@@ -641,7 +710,7 @@ input.form-control {
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
   /* height: 15rem; */
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 .search-container li.list-group-item {
   border-radius: 0.25rem;
@@ -693,5 +762,8 @@ input.form-control {
 .modal-body {
   padding: 1rem;
   margin-top: 0.5rem;
+}
+.rounded-lg {
+  border-radius: 0.3rem;
 }
 </style>
