@@ -7,6 +7,15 @@
     ref="filtersModal"
     class
   >
+    <b-row>
+      <b-col sm="12"><h5>Sorting</h5></b-col>
+    </b-row>
+    <b-row>
+      <b-col sm="12">TWOSORTING OPTIIIONS</b-col>
+    </b-row>
+    <b-row>
+      <b-col sm="12"><h5>Filters</h5></b-col>
+    </b-row>
     <b-row class="">
       <div class="scroll-container">
         <b-col sm="12">
