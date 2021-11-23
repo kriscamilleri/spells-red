@@ -31,6 +31,8 @@
       <div id="wrapper" :class="{ toggled: sideBarOn }" class="pt-2">
         <div id="sidebar-wrapper" class="nav-bg">
           <filters-modal
+            :sortFields="['name', 'level', 'class']"
+            @sortField="captureSortField"
             @sideBarOn="captureSideBarStatus"
             :classFilters="classFilters"
             @classFilters="captureClassFilters"
@@ -185,6 +187,7 @@ export default {
         "Necromancy",
         "Transmutation",
       ],
+      sortField: "name",
       printEnabled: false,
       lastElemY: Number,
     };
@@ -202,7 +205,7 @@ export default {
         spells = this.filterSchools(spells);
         spells = this.filterConcentration(spells);
         spells = this.filterRitual(spells);
-
+        spells = this.sortSpells(spells);
         return spells;
       }
       return [];
@@ -283,9 +286,19 @@ export default {
     captureRitualFilters(value) {
       this.ritualFilters = value;
     },
-
     captureConcentrationFilters(value) {
       this.concentrationFilters = value;
+    },
+    captureSortField(value) {
+      this.sortField = value;
+      console.log(value);
+    },
+    sortSpells(spells) {
+      const result = spells.sort((a, b) =>
+        a[this.sortField] > b[this.sortField] ? 1 : -1
+      );
+      console.log(result);
+      return result;
     },
     filterSearch(spells, searchText) {
       if (searchText.length > 0) {

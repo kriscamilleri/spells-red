@@ -8,13 +8,28 @@
     class
   >
     <b-row>
-      <b-col sm="12"><h5>Sorting</h5></b-col>
+      <b-col sm="12"><h5 class="text-primary">Sorting</h5></b-col>
     </b-row>
     <b-row>
-      <b-col sm="12">TWOSORTING OPTIIIONS</b-col>
+      <b-col sm="12" class="pb-4">
+        <b-row>
+          <span class="col-11 align-text-bottom">
+            <strong class="filter-header">Option</strong>
+            <hr />
+          </span>
+        </b-row>
+        <b-form-group>
+          <b-form-radio-group
+            v-model="sortFieldSelected"
+            class="faux-column row"
+            :options="getSortFilterOptions"
+          >
+          </b-form-radio-group>
+        </b-form-group>
+      </b-col>
     </b-row>
     <b-row>
-      <b-col sm="12"><h5>Filters</h5></b-col>
+      <b-col sm="12"><h5 class="text-primary">Filters</h5></b-col>
     </b-row>
     <b-row class="">
       <div class="scroll-container">
@@ -231,6 +246,7 @@ export default {
     schoolFilters: Array,
     ritualFilters: Array,
     concentrationFilters: Array,
+    sortFields: Array,
   },
   data: function () {
     return {
@@ -252,9 +268,16 @@ export default {
       sourceAllSelected: true,
       concentrationAllSelected: true,
       ritualAllSelected: true,
+      selectedSortField: this.sortFields,
+      sortFieldSelected: "name",
     };
   },
   computed: {
+    getSortFilterOptions() {
+      return this.selectedSortField.map((c) => {
+        return { text: this.capitalizeFirstLetter(c), value: c };
+      });
+    },
     getClassOptions: function () {
       let arr = [];
       for (let i = 0; i < this.localClassFilters.length; i++) {
@@ -325,6 +348,9 @@ export default {
     },
   },
   methods: {
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
     hideModal: function () {
       this.$refs["filtersModal"].hide();
     },
@@ -399,6 +425,9 @@ export default {
         this.selectedRitualFilters.length == this.localRitualFilters.length;
 
       this.$emit("ritualFilters", val);
+    },
+    sortFieldSelected(val) {
+      this.$emit("sortField", val);
     },
   },
 };
