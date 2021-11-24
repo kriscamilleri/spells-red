@@ -31,7 +31,7 @@
       <div id="wrapper" :class="{ toggled: sideBarOn }" class="pt-2">
         <div id="sidebar-wrapper" class="nav-bg">
           <filters-modal
-            :sortFields="['name', 'level', 'class']"
+            :sortFields="sortFields"
             @sortField="captureSortField"
             @sideBarOn="captureSideBarStatus"
             :classFilters="classFilters"
@@ -139,6 +139,7 @@ export default {
       currentPage: 1,
       pageSize: 20,
       cardCount: 20,
+      sortFields: ["name", "level", "class"],
       classFilters: [
         "artificer",
         "bard",
@@ -294,9 +295,23 @@ export default {
       console.log(value);
     },
     sortSpells(spells) {
-      const result = spells.sort((a, b) =>
-        a[this.sortField] > b[this.sortField] ? 1 : -1
-      );
+      let result = Array();
+      if (this.sortField === "level") {
+        result = spells.sort((a, b) => {
+          //dirty, dirty boy
+          let aCantripCleaned =
+            a[this.sortField] === "Cantrip" ? "0" : a[this.sortField];
+          let bCantripCleaned =
+            b[this.sortField] === "Cantrip" ? "0" : b[this.sortField];
+
+          return aCantripCleaned > bCantripCleaned ? 1 : -1;
+        });
+      } else {
+        result = spells.sort((a, b) =>
+          a[this.sortField] > b[this.sortField] ? 1 : -1
+        );
+      }
+
       console.log(result);
       return result;
     },

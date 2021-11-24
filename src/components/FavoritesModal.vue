@@ -451,18 +451,19 @@ export default {
         const container = document.getElementById("infoContainer");
         if (container) {
           self.containerWidth = container.offsetWidth;
+
+          let lastChild = subcontainer.lastChild.lastChild;
+          lastChild =
+            lastChild.innerHTML === "" ? lastChild.previousSibling : lastChild;
+          const infoContainerPosRight =
+            self.getElementOffset(infoContainer).right;
+          const lastChildPosRight = self.getElementOffset(lastChild).right;
+          const scrollDistance = self.pageCount * (self.containerWidth + 15);
+          const nextPage = lastChildPosRight > infoContainerPosRight + 17;
+          self.nextEnabled = nextPage;
+          const previousPage = scrollDistance > 0;
+          self.previousEnabled = previousPage;
         }
-        let lastChild = subcontainer.lastChild.lastChild;
-        lastChild =
-          lastChild.innerHTML === "" ? lastChild.previousSibling : lastChild;
-        const infoContainerPosRight =
-          self.getElementOffset(infoContainer).right;
-        const lastChildPosRight = self.getElementOffset(lastChild).right;
-        const scrollDistance = self.pageCount * (self.containerWidth + 15);
-        const nextPage = lastChildPosRight > infoContainerPosRight + 17;
-        self.nextEnabled = nextPage;
-        const previousPage = scrollDistance > 0;
-        self.previousEnabled = previousPage;
       };
       this.delayExecution(100, executable);
     },
@@ -477,13 +478,17 @@ export default {
       const executable = function () {
         const subcontainer = document.getElementById("infoSubcontainer");
         const container = document.getElementById("infoContainer");
-        self.containerWidth = container.offsetWidth;
-        let lastChild =
-          subcontainer.lastChild.lastChild.innerHTML === ""
-            ? lastChild.previousSibling
-            : lastChild;
+        if (container) {
+          self.containerWidth = container.offsetWidth;
+        }
+        if (subcontainer) {
+          let lastChild =
+            subcontainer.lastChild.lastChild.innerHTML === ""
+              ? lastChild?.previousSibling
+              : lastChild;
 
-        subcontainer.style.transform = `translateX(0px)`;
+          subcontainer.style.transform = `translateX(0px)`;
+        }
         self.pageCount = 0;
         // if (previousPage || nextPage) {
         //   self.paginationEnabled = true;
@@ -494,6 +499,9 @@ export default {
       this.delayExecution(10, executable);
     },
     getElementOffset: function (el) {
+      if (typeof el.getBoundingClientRect !== "function") {
+        return 0;
+      }
       const rect = el.getBoundingClientRect();
       return {
         top: rect.top + window.pageYOffset,
