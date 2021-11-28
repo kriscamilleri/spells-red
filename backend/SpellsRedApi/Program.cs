@@ -98,9 +98,9 @@ app.MapGet("/spell/{repository}", (string repository) =>
 .WithName("GetSpells");
 
 
-app.MapGet("/spell/{repository}/{name}", (string repository, string name) =>
+app.MapGet("/spell/{repository}/{spell}", (string repository, string spell) =>
 {
-    string cleanName = Regex.Replace(name, "[^A-Za-z0-9]", "");
+    string cleanSpell = Regex.Replace(spell, "[^A-Za-z0-9]", "");
     string cleanRepository = Regex.Replace(repository, "[^A-Za-z0-9]", "");
 
     Spell? results = new Spell();
@@ -108,7 +108,7 @@ app.MapGet("/spell/{repository}/{name}", (string repository, string name) =>
 
     using (var store = new DataStore($"Repositories\\{cleanRepository}.json"))
     {
-        results = store.GetCollection<Spell>().AsQueryable().FirstOrDefault(c => c.Name == name);
+        results = store.GetCollection<Spell>().AsQueryable().FirstOrDefault(c => c.Name == spell);
     }
     return Results.Json(results, jsonOptions);
 })
