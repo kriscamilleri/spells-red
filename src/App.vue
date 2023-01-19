@@ -565,9 +565,9 @@ export default {
   --primary-hover: #e80817;
   --primary-focus: #a51d26;
   --secondary: #795c62;
-  --success: #f5be47;
-  --success-hover: #fbae06;
-  --success-focus: #e39f0c;
+  --success: #7a49a5;
+  --success-hover: #946DB7;
+  --success-focus: #613A84;
   --info: #6e93b6;
   --info-hover: #5594cf;
   --info-focus: #486c8e;
