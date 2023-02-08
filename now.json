@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/pastebin",
-            "destination": "https://privatebin.net/?695c3f35226ca035#7LzpWdFXbK3cquCpkubo4GYqUAFXcWv4HHr9NXhjG9j2"
+            "destination": "https://rentry.co/xa4pvd/raw"
         }
     ]
 }
