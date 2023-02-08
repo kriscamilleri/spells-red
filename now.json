@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/pastebin",
-            "destination": "https://rentry.co/xa4pvd/raw"
+            "destination": "https://pastebin.pl/view/raw/5e913224"
         }
     ]
 }
