@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/pastebin",
-            "destination": "https://ctxt.io/2/AABQSl45Fg"
+            "destination": "https://raw.githubusercontent.com/jinec94024/5LocalSave/main/test.json"
         }
     ]
 }
