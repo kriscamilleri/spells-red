@@ -1,24 +1,19 @@
-# spells-red
+# Spells Red: 5e Spell Search
 
-## Project setup
-```
-npm install
-```
+Spells Red is a web application designed to help players and Dungeon Masters quickly and efficiently search for spells in 5th Edition. The application is live at [spells.red](https://spells.red).
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Features
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- **Comprehensive Spell Database**: Access an extensive list of D&D 5e spells with detailed information.
+- **Intuitive Search Functionality**: Easily find spells by name, level, school, casting time, and other criteria.
+- **Responsive Design**: Optimized for both desktop and mobile devices for on-the-go access.
+- **Frontend**: Vue.js
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Project Setup
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To set up the project locally, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/kriscamilleri/spells-red.git
+   ```
